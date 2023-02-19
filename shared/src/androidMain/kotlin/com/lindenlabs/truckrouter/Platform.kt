@@ -1,9 +1,9 @@
 package com.lindenlabs.truckrouter
 
+import android.content.Context
 import com.lindenlabs.truckrouter.data.AppDataSource
-import com.lindenlabs.truckrouter.domain.ScheduleDomainMapper
 
-class AndroidPlatform(override val rawJson: String) : Platform {
+class AndroidPlatform(private val context: Context) : Platform {
     override val appDataSource: AppDataSource
-        get() = LocalAppDataSource(this)
+        get() = LocalAppDataSource(resourceReader = ResourceReader(context))
 }

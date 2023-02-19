@@ -1,9 +1,8 @@
 package com.lindenlabs.truckrouter
 
-import platform.UIKit.UIDevice
+import com.lindenlabs.truckrouter.data.AppDataSource
 
-class IOSPlatform: Platform {
-    override val name: String = UIDevice.currentDevice.systemName() + " " + UIDevice.currentDevice.systemVersion
+class IOSPlatform(override val resourceReader: ResourceReader) : Platform {
+    override val appDataSource: AppDataSource
+        get() = LocalAppDataSource(this)
 }
-
-actual fun getPlatform(): Platform = IOSPlatform()
