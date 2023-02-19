@@ -7,6 +7,6 @@ class GetScheduleDomainEntity(private val platform: Platform, private val mapper
 
     suspend operator fun invoke(): ScheduleDomainEntity {
         val rawSchedule = platform.appDataSource.getDailySchedule()
-        return mapper.map(rawSchedule)
+        return mapper.invoke(rawSchedule)
     }
 }
