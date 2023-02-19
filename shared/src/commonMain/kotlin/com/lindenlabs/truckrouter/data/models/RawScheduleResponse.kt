@@ -5,7 +5,6 @@ import kotlinx.serialization.Serializable
 typealias RawShipment = String
 typealias RawDriver = String
 
-// todo remove default values
 @Serializable
 data class RawScheduleResponse(
     val shipments: List<RawShipment>,
