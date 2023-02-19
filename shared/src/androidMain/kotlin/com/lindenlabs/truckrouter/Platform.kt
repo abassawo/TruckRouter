@@ -1,7 +1,9 @@
 package com.lindenlabs.truckrouter
 
-class AndroidPlatform : Platform {
-    override val name: String = "Android ${android.os.Build.VERSION.SDK_INT}"
-}
+import com.lindenlabs.truckrouter.data.AppDataSource
+import com.lindenlabs.truckrouter.domain.ScheduleDomainMapper
 
-actual fun getPlatform(): Platform = AndroidPlatform()
+class AndroidPlatform(override val rawJson: String) : Platform {
+    override val appDataSource: AppDataSource
+        get() = LocalAppDataSource(this)
+}

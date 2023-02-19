@@ -1,7 +1,8 @@
 package com.lindenlabs.truckrouter
 
-interface Platform {
-    val name: String
-}
+import com.lindenlabs.truckrouter.data.AppDataSource
 
-expect fun getPlatform(): Platform
+interface Platform {
+    val rawJson: String
+    val appDataSource: AppDataSource
+}

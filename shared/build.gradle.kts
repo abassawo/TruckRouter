@@ -10,6 +10,11 @@ kotlin {
                 jvmTarget = "1.8"
             }
         }
+        sourceSets["androidMain"].resources.setSrcDirs(
+            listOf(
+                "src/commonMain/res" // <-- add the commonMain Resources
+            )
+        )
     }
     
     listOf(
@@ -23,7 +28,11 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
