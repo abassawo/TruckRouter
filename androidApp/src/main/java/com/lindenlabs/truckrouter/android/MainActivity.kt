@@ -12,7 +12,9 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import com.lindenlabs.truckrouter.ResourceReader
 import com.lindenlabs.truckrouter.data.models.RawScheduleResponse
 import com.lindenlabs.truckrouter.domain.DriverDomainEntity
 import com.lindenlabs.truckrouter.domain.ScheduleDomainMapper
@@ -58,35 +60,8 @@ fun GreetingView(text: String) {
 @Composable
 fun DefaultPreview() {
     MyApplicationTheme {
-        val data = """
-            {
-              "shipments": [
-                "215 Osinski Manors",
-                "9856 Marvin Stravenue",
-                "7127 Kathlyn Ferry",
-                "987 Champlin Lake",
-                "63187 Volkman Garden Suite 447",
-                "75855 Dessie Lights",
-                "1797 Adolf Island Apt. 744",
-                "2431 Lindgren Corners",
-                "8725 Aufderhar River Suite 859",
-                "79035 Shanna Light Apt. 322"
-              ],
-              "drivers": [
-                "Everardo Welch",
-                "Orval Mayert",
-                "Howard Emmerich",
-                "Izaiah Lowe",
-                "Monica Hermann",
-                "Ellis Wisozk",
-                "Noemie Murphy",
-                "Cleve Durgan",
-                "Murphy Mosciski",
-                "Kaiser Sose"
-              ]
-            }
-        """.trimIndent()
-        val rawScheduleResponse = Json.decodeFromString<RawScheduleResponse>(data)
+        val json = ResourceReader(LocalContext.current).invoke()
+        val rawScheduleResponse = Json.decodeFromString<RawScheduleResponse>(json)
         RootView(driverDomainEntities = ScheduleDomainMapper().invoke(rawScheduleResponse))
     }
 }
