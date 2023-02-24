@@ -49,7 +49,6 @@ fun DriverItemView(
                 contentDescription = "",
                 modifier = Modifier
                     .clickable(MutableInteractionSource(), null) {
-//                        onDeleteClick()
                     }
             )
         }
@@ -57,10 +56,5 @@ fun DriverItemView(
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(text = schedule.destinationAddress, fontWeight = FontWeight.SemiBold)
-//        Text(
-//            text ="${schedule.score}",
-//            color = Color.DarkGray,
-//            modifier = Modifier.align(Alignment.End)
-//        )
     }
 }
