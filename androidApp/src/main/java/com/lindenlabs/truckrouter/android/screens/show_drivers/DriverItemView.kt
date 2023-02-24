@@ -15,11 +15,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lindenlabs.truckrouter.DateTimeUtil
-import com.lindenlabs.truckrouter.presentation.ScheduledPairViewEntity
+import com.lindenlabs.truckrouter.presentation.ScheduleViewEntity
 
 @Composable
 fun DriverItemView(
-    schedule: ScheduledPairViewEntity,
+    schedule: ScheduleViewEntity,
     backgroundColor: Color,
     onDriverClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -44,8 +44,15 @@ fun DriverItemView(
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 20.sp
             )
+            Text(
+                text = "${schedule.score}",
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 20.sp
+            )
         }
+
         Spacer(modifier = Modifier.height(16.dp))
+
         Text(text = schedule.destinationAddress, fontWeight = FontWeight.Light)
         Spacer(modifier = Modifier.height(16.dp))
         Text(

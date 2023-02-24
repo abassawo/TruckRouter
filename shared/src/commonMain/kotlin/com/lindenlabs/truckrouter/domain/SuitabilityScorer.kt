@@ -12,8 +12,12 @@ class SuitabilityScorer {
     private fun calculateBaseScore(driverName: String, streetName: String): Double {
         val isEvenLengthStreetName = streetName.length % 2 == 0
         return when {
-            isEvenLengthStreetName -> driverName.count { it.isVowel() }  * 1.5
-            else -> driverName.count { it.isConsonant() }.toDouble()
+            isEvenLengthStreetName -> {
+                val vowelCount = driverName.getVowelCount()
+                vowelCount * 1.5
+            }
+            else -> driverName.getConsonantCount().toDouble()
+
         }
     }
 
@@ -22,9 +26,9 @@ class SuitabilityScorer {
         val isOddStreetName = streetName.length % 2 != 0
         val isOddDriverName = driverName.length % 2 != 0
         return when {
-            isOddStreetName && isOddDriverName ->  1.5
+            isOddStreetName && isOddDriverName -> 1.5
             else -> 1.0
-         }
+        }
     }
 
     companion object {
@@ -33,9 +37,34 @@ class SuitabilityScorer {
         private fun Char.isConsonant(): Boolean {
             return this.isLetter() && VOWELS.contains(this).not()
         }
+
         private fun Char.isVowel() =
             this.isLetter() && VOWELS.contains(this)
     }
 }
 
+val vowels = "aeiou"
+private fun String.getConsonantCount(): Int {
+    var count = 0
+    for(i in 0 until this.length) {
+        val current = this[i]
+        when {
+            current.isLetter() && current.isVowel().not() -> count++
+        }
+    }
+    return count
+}
+
+private fun Char.isVowel() = vowels.contains(this)
+
+private fun String.getVowelCount(): Int {
+    var count = 0
+    for(i in 0 until this.length) {
+        val current = this[i]
+        when {
+            current.isLetter() && current.isVowel() -> count++
+        }
+    }
+    return count
+}
 

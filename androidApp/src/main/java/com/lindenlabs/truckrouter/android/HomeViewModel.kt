@@ -24,6 +24,5 @@ class HomeViewModel @Inject constructor(val getScheduleDomainEntity: GetSchedule
                 }
                 .onFailure { Log.d("Failure", it.toString()) }
         }
-
     }
 }
