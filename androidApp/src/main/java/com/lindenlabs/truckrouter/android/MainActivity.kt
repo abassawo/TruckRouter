@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            RootView(driverDomainEntities = homeViewModel.data)
+            RootView(driverDomainEntities = homeViewModel.data ?: emptySet())
         }
     }
 }

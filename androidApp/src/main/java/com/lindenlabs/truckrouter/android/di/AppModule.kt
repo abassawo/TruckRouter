@@ -6,6 +6,7 @@ import com.lindenlabs.truckrouter.AndroidPlatform
 import com.lindenlabs.truckrouter.ResourceReader
 import com.lindenlabs.truckrouter.domain.GetScheduleDomainEntity
 import com.lindenlabs.truckrouter.domain.ScheduleDomainMapper
+import com.lindenlabs.truckrouter.presentation.ViewMapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,4 +30,7 @@ class AppModule {
             mapper = ScheduleDomainMapper()
         )
     }
+
+    @Provides
+    fun provideViewMapper(): ViewMapper = ViewMapper()
 }
