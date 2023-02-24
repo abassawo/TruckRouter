@@ -2,9 +2,14 @@ package com.lindenlabs.truckrouter.android.screens.show_drivers
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,15 +44,23 @@ fun DriverItemView(
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 20.sp
             )
+            Icon(
+                imageVector = Icons.Default.LocationOn,
+                contentDescription = "",
+                modifier = Modifier
+                    .clickable(MutableInteractionSource(), null) {
+//                        onDeleteClick()
+                    }
+            )
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Text(text = schedule.destinationAddress, fontWeight = FontWeight.Light)
-        Text(
-            text ="${schedule.score}",
-            color = Color.DarkGray,
-            modifier = Modifier.align(Alignment.End)
-        )
+        Text(text = schedule.destinationAddress, fontWeight = FontWeight.SemiBold)
+//        Text(
+//            text ="${schedule.score}",
+//            color = Color.DarkGray,
+//            modifier = Modifier.align(Alignment.End)
+//        )
     }
 }

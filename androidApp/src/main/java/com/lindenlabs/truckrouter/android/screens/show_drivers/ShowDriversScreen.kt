@@ -4,9 +4,11 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Divider
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -29,11 +31,10 @@ const val LightGreenHex = 0xffe7ed9b
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ShowDriversScreen(viewEntity: HomeViewEntity, navController: NavController) {
-    val colors = listOf(RedOrangeHex, RedPinkHex, LightGreenHex, BabyBlueHex, VioletHex)
-
     Scaffold { padding ->
         Column(
             modifier = Modifier
+                .background(Color.Black)
                 .fillMaxSize()
                 .padding(padding)
         ) {
@@ -44,7 +45,9 @@ fun ShowDriversScreen(viewEntity: HomeViewEntity, navController: NavController) 
                 exit = fadeOut()
             ) {
                 TopAppBar(
-                    title = { Text(text = viewEntity.headerText) }
+                    backgroundColor = Color.Transparent,
+                    title = { Text(color = Color.White, text = viewEntity.headerText) },
+
                 )
             }
             Box(
@@ -57,14 +60,15 @@ fun ShowDriversScreen(viewEntity: HomeViewEntity, navController: NavController) 
                     exit = fadeOut()
                 ) {
                     Text(
+                        color = Color.White,
                         text = "Total Suitability  " + viewEntity.totalSuitability,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 30.sp
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 18.sp
                     )
                 }
             }
             LazyColumn(
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.fillMaxWidth()
             ) {
                 items(
                     items = viewEntity.schedules,
@@ -72,14 +76,25 @@ fun ShowDriversScreen(viewEntity: HomeViewEntity, navController: NavController) 
                 ) { schedule ->
                     DriverItemView(
                         schedule = schedule,
-                        backgroundColor = Color(colors.random()),
+                        backgroundColor = Color.White,
                         onDriverClick = {
-                            navController.navigate("schedule_detail/${viewEntity.schedules.indexOf(schedule)}")
+                            navController.navigate(
+                                "schedule_detail/${
+                                    viewEntity.schedules.indexOf(
+                                        schedule
+                                    )
+                                }"
+                            )
                         },
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(16.dp)
                             .animateItemPlacement()
+                    )
+                    Divider(
+                        color = Color.Blue, modifier = Modifier
+                            .fillMaxHeight()
+                            .width(2.dp)
                     )
                 }
             }
