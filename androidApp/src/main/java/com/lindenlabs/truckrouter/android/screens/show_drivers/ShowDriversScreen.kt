@@ -44,7 +44,7 @@ fun ShowDriversScreen(viewEntity: HomeViewEntity, navController: NavController) 
                 exit = fadeOut()
             ) {
                 TopAppBar(
-                    title = { Text(text = "All Drivers") }
+                    title = { Text(text = viewEntity.headerText) }
                 )
             }
             Box(

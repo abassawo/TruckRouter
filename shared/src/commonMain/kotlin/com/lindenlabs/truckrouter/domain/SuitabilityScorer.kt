@@ -22,11 +22,10 @@ class SuitabilityScorer {
     }
 
     private fun getPremiumMultipliers(driverName: String, streetName: String): Double {
-        // TODO - What I am understanding step 3 of the algorithm to mean but want to confirm
         val isOddStreetName = streetName.length % 2 != 0
         val isOddDriverName = driverName.length % 2 != 0
         return when {
-            isOddStreetName && isOddDriverName -> 1.5
+            isOddStreetName && isOddDriverName -> 1.5 // TODO - What I am understanding step 3 of the algorithm to mean but want to confirm
             else -> 1.0
         }
     }
