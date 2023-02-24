@@ -12,9 +12,9 @@ class ScheduleDomainMapper(
     private val map: MutableMap<DriverDomainEntity, ShipmentDomainEntity> =
         mutableMapOf()
 
-    operator fun invoke(rawScheduleResponse: RawScheduleResponse): ScheduleDomainEntity {
+    operator fun invoke(rawScheduleResponse: RawScheduleResponse): Map<DriverDomainEntity, ShipmentDomainEntity> {
         val matching = rawScheduleResponse.mappedToMaximizeSuitabilityScore()
-        return matching.keys // todo
+        return matching // todo
     }
 
     private fun RawScheduleResponse.mappedToMaximizeSuitabilityScore(): Map<DriverDomainEntity, ShipmentDomainEntity> {

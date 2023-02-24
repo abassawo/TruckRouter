@@ -4,20 +4,19 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavBackStackEntry
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.lindenlabs.truckrouter.ResourceReader
+import com.lindenlabs.truckrouter.android.screens.show_drivers.ShowDriversScreen
 import com.lindenlabs.truckrouter.data.models.RawScheduleResponse
-import com.lindenlabs.truckrouter.domain.DriverDomainEntity
 import com.lindenlabs.truckrouter.domain.ScheduleDomainMapper
+import com.lindenlabs.truckrouter.presentation.HomeViewEntity
+import com.lindenlabs.truckrouter.presentation.ViewMapper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
@@ -28,33 +27,30 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            RootView(driverDomainEntities = homeViewModel.data ?: emptySet())
+            homeView(viewEntity = homeViewModel.data!!)
         }
     }
 }
 
 @Composable
-fun RootView(driverDomainEntities: Set<DriverDomainEntity>) {
-    MyApplicationTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colors.background
+fun homeView(viewEntity: HomeViewEntity) {
+    return MyApplicationTheme {
+        NavHost(
+            navController = rememberNavController(),
+            startDestination = "drivers_list"
         ) {
-            LazyColumn(
-                modifier = Modifier
-            ) {
-                itemsIndexed(items = driverDomainEntities.toList()) { index, item ->
-                    GreetingView(text = item.name)
-                }
+            composable(route = "drivers_list") {
+                ShowDriversScreen(viewEntity)
+            }
+            composable(route = "shipment_detail") { backStackEntry ->
+                val shipment = backStackEntry.toNoteId()
+//                DriverDetailView(shipment = shipment.id, navController = navController)
             }
         }
     }
 }
 
-@Composable
-fun GreetingView(text: String) {
-    Text(text = text)
-}
+private fun NavBackStackEntry.toNoteId(): String = arguments?.getString("driverId") ?: ""
 
 @Preview
 @Composable
@@ -62,6 +58,6 @@ fun DefaultPreview() {
     MyApplicationTheme {
         val json = ResourceReader(LocalContext.current).invoke()
         val rawScheduleResponse = Json.decodeFromString<RawScheduleResponse>(json)
-        RootView(driverDomainEntities = ScheduleDomainMapper().invoke(rawScheduleResponse))
+        ShowDriversScreen(viewEntity = ViewMapper().map(ScheduleDomainMapper().invoke(rawScheduleResponse)))
     }
 }
