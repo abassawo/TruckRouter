@@ -1,12 +1,32 @@
 package com.lindenlabs.truckrouter.domain
 
+
+enum class Multiplier {
+    SAME_LENGTH,
+    DIVISIBLE_BY_THREE,
+    DIVISIBLE_BY_FIVE;
+
+    fun isAvailable(driverName: String, streetName: String): Boolean {
+        return when(this) {
+            SAME_LENGTH -> driverName.length == streetName.length
+            DIVISIBLE_BY_THREE -> driverName.length % 3 == 0 && streetName.length % 3 == 0
+            DIVISIBLE_BY_FIVE -> driverName.length % 5 == 0 && streetName.length % 5 == 0
+        }
+    }
+}
+
 class SuitabilityScorer {
 
     fun score(driverName: String, streetName: String): Score {
         println("Driver name $driverName Street name $streetName")
         val baseScore = calculateBaseScore(driverName, streetName)
-        val multiplier = getPremiumMultipliers(driverName, streetName)
-        return Score(baseScore, multiplier)
+        var multiplierAmount = 1.0
+        for(multiplier in Multiplier.values()) {
+            if(multiplier.isAvailable(driverName = driverName, streetName = streetName)) {
+                multiplierAmount *= 1.5
+            }
+        }
+        return Score(baseScore, multiplierAmount)
     }
 
     private fun calculateBaseScore(driverName: String, streetName: String): Double {
@@ -18,15 +38,6 @@ class SuitabilityScorer {
             }
             else -> driverName.getConsonantCount().toDouble()
 
-        }
-    }
-
-    private fun getPremiumMultipliers(driverName: String, streetName: String): Double {
-        val isOddStreetName = streetName.length % 2 != 0
-        val isOddDriverName = driverName.length % 2 != 0
-        return when {
-            isOddStreetName && isOddDriverName -> 1.5 // TODO - What I am understanding step 3 of the algorithm to mean but want to confirm
-            else -> 1.0
         }
     }
 
