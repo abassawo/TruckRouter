@@ -3,9 +3,14 @@ package com.lindenlabs.truckrouter.domain
 /*
    Street name extractor: assumes name are not numerical...
  */
-class StreetNameExtractor {
 
-    operator fun invoke(address: String): String =
+interface ExtractStreetName {
+    operator fun invoke(address: String): String
+}
+
+class StreetNameExtractor : ExtractStreetName {
+
+    override operator fun invoke(address: String): String =
         address
             .withoutDigits()
             .replace("Suite", "")

@@ -3,8 +3,8 @@ package com.lindenlabs.truckrouter.domain
 import com.lindenlabs.truckrouter.data.models.RawScheduleResponse
 
 class ScheduleDomainMapper(
-    private val streetNameExtractor: StreetNameExtractor = StreetNameExtractor(),
-    private val findBestSuitedDriver: FindBestSuitedDriver = FindBestSuitedDriver()
+    private val streetNameExtractor: ExtractStreetName = StreetNameExtractor(),
+    private val findBestSuitedDriver: ScheduleMatcher = FindBestSuitedDriver()
 ) {
 
     operator fun invoke(rawScheduleResponse: RawScheduleResponse): ScheduleDomainEntity =

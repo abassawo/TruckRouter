@@ -1,7 +1,13 @@
 package com.lindenlabs.truckrouter.domain
 
-class FindBestSuitedDriver(private val scorer: SuitabilityScorer = SuitabilityScorer()) {
+interface ScheduleMatcher {
     operator fun invoke(
+        destination: ShipmentDomainEntity,
+        drivers: MutableList<DriverDomainEntity>
+    ): DriverDomainEntity?
+}
+class FindBestSuitedDriver(private val scorer: SuitabilityScorer = SuitabilityScorer()) : ScheduleMatcher {
+    override operator fun invoke(
         destination: ShipmentDomainEntity,
         drivers: MutableList<DriverDomainEntity>
     ): DriverDomainEntity? = destination.toSuitabilityScores(drivers).firstOrNull()

@@ -6,7 +6,7 @@ import kotlin.test.assertEquals
 
 class StreetNameExtractorTest{
     val underTest: StreetNameExtractor = StreetNameExtractor()
-    val arrangeBuilder = ArrangeBuilder()
+    private val arrangeBuilder = ArrangeBuilder()
 
     @Test
     fun `validate street name is extracted for plain old address`() {
