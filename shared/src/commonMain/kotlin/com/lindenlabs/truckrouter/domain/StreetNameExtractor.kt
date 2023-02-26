@@ -10,5 +10,16 @@ class StreetNameExtractor {
             .withoutDigits()
             .replace("Suite", "")
             .replace("Apt.", "")
+            .removeTrailingSpaceIfAny()
+
     private fun String.withoutDigits(): String = filterNot { it.isDigit() }
+}
+
+private fun String.removeTrailingSpaceIfAny(): String {
+    return when {
+        this.startsWith(" ") -> {
+            return this.replaceFirstChar { "" }
+        }
+        else -> this
+    }
 }
