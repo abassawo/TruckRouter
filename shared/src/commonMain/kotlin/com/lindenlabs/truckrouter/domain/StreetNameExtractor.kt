@@ -10,12 +10,13 @@ class StreetNameExtractor {
             .withoutDigits()
             .replace("Suite", "")
             .replace("Apt.", "")
-            .removeTrailingSpaceIfAny()
+            .removePrefixSpaceIfAny()
+            .removeSuffixSpaceIfAny()
 
     private fun String.withoutDigits(): String = filterNot { it.isDigit() }
 }
 
-private fun String.removeTrailingSpaceIfAny(): String {
+private fun String.removePrefixSpaceIfAny(): String {
     return when {
         this.startsWith(" ") -> {
             return this.replaceFirstChar { "" }
@@ -23,3 +24,17 @@ private fun String.removeTrailingSpaceIfAny(): String {
         else -> this
     }
 }
+
+private fun String.removeSuffixSpaceIfAny(): String {
+    return when {
+        this.endsWith(" ") -> {
+            return this.replaceLastChar()
+        }
+        else -> this
+    }
+}
+
+public inline fun String.replaceLastChar(): String {
+    return this.dropLastWhile { it.isLetter().not() }
+}
+
