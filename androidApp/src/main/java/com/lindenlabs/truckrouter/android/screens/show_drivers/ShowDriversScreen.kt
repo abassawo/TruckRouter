@@ -20,23 +20,30 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.lindenlabs.truckrouter.android.WindowSize
+import com.lindenlabs.truckrouter.android.WindowType
 import com.lindenlabs.truckrouter.presentation.HomeViewEntity
-
-const val RedOrangeHex = 0xffffab91
-const val RedPinkHex = 0xfff48fb1
-const val BabyBlueHex = 0xff81deea
-const val VioletHex = 0xffcf94da
-const val LightGreenHex = 0xffe7ed9b
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ShowDriversScreen(viewEntity: HomeViewEntity, navController: NavController) {
+fun ShowDriversScreen(
+    viewEntity: HomeViewEntity,
+    navController: NavController,
+    occupyMaxWidth: Boolean = true
+) {
     Scaffold { padding ->
         Column(
             modifier = Modifier
                 .background(Color.Black)
-                .fillMaxSize()
                 .padding(padding)
+                .wrapContentWidth()
+//                .also {
+//                    if(occupyMaxWidth) {
+//                        it.fillMaxSize()
+//                    } else {
+//                        it.fillMaxWidth(WindowType.Compact.sizeThreshold.toFloat())
+//                    }
+//                }
         ) {
             Spacer(modifier = Modifier.height(4.dp))
             this@Column.AnimatedVisibility(
@@ -48,10 +55,12 @@ fun ShowDriversScreen(viewEntity: HomeViewEntity, navController: NavController) 
                     backgroundColor = Color.Transparent,
                     title = { Text(color = Color.White, text = viewEntity.headerText) },
 
-                )
+                    )
             }
             Box(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .padding(PaddingValues(start = 16.dp))
+                    .wrapContentWidth(),
                 contentAlignment = Alignment.Center
             ) {
                 this@Column.AnimatedVisibility(
@@ -68,7 +77,7 @@ fun ShowDriversScreen(viewEntity: HomeViewEntity, navController: NavController) 
                 }
             }
             LazyColumn(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.wrapContentWidth()
             ) {
                 items(
                     items = viewEntity.schedules,

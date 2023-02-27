@@ -1,9 +1,9 @@
 package com.lindenlabs.truckrouter.android
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalConfiguration
 
 data class WindowSize(
@@ -11,7 +11,7 @@ data class WindowSize(
     val height: WindowType
 )
 
-enum class WindowType { Compact, Medium, Expanded }
+enum class WindowType(val sizeThreshold: Int) { Compact(600), Medium(840), Expanded(Int.MAX_VALUE) }
 
 @Composable
 fun rememberWindowSize(): WindowSize {
@@ -30,8 +30,8 @@ fun rememberWindowSize(): WindowSize {
 }
 
 fun getScreenWidth(width: Int): WindowType = when {
-    width < 600 -> WindowType.Compact
-    width < 840 -> WindowType.Medium
+    width < WindowType.Compact.sizeThreshold -> WindowType.Compact
+    width < WindowType.Medium.sizeThreshold -> WindowType.Medium
     else -> WindowType.Expanded
 }
 
