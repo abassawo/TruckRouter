@@ -1,4 +1,4 @@
-package com.lindenlabs.truckrouter.android.utils
+package com.lindenlabs.truckrouter.android.ui.utils
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue

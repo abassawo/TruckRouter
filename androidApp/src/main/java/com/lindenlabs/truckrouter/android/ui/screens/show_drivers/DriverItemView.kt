@@ -1,4 +1,4 @@
-package com.lindenlabs.truckrouter.android.screens.show_drivers
+package com.lindenlabs.truckrouter.android.ui.screens.show_drivers
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -44,6 +44,7 @@ fun DriverItemView(
             ) {
                 Text(
                     text = schedule.driverName,
+                    color = Color.Black,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 20.sp
                 )

@@ -1,15 +1,14 @@
-package com.lindenlabs.truckrouter.android.base.ui.views
+package com.lindenlabs.truckrouter.android.ui.views
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.lindenlabs.truckrouter.android.screens.show_drivers.ShowDriversScreen
-import com.lindenlabs.truckrouter.android.screens.show_shipment_detail.DriverDetailView
+import com.lindenlabs.truckrouter.android.ui.screens.show_drivers.ShowDriversScreen
+import com.lindenlabs.truckrouter.android.ui.screens.show_shipment_detail.DriverDetailView
 import com.lindenlabs.truckrouter.presentation.HomeViewEntity
 import com.lindenlabs.truckrouter.presentation.ScheduleViewEntity
 

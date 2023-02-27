@@ -1,4 +1,4 @@
-package com.lindenlabs.truckrouter.android.screens.show_drivers
+package com.lindenlabs.truckrouter.android.ui.screens.show_drivers
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.lindenlabs.truckrouter.android.base.ui.ThemeColors
+import com.lindenlabs.truckrouter.android.ui.ThemeColors
 import com.lindenlabs.truckrouter.presentation.HomeViewEntity
 import com.lindenlabs.truckrouter.presentation.ScheduleViewEntity
 
@@ -80,7 +80,7 @@ fun ShowDriversScreen(
                         schedule = schedule,
                         backgroundColor = when {
                             viewEntity.highlightSelected -> if (schedule == viewEntity.getSelectedSchedule())  ThemeColors.lightColors().first() else Color.White
-                            else -> ThemeColors.lightColors().first()
+                            else -> Color.White
                         },
                         onDriverClick = {
                             clickAction(schedule)
