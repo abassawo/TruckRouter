@@ -1,4 +1,4 @@
-package com.lindenlabs.truckrouter.android
+package com.lindenlabs.truckrouter.android.base.ui
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape

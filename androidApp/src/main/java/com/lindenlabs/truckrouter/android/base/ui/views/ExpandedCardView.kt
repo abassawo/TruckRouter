@@ -1,4 +1,4 @@
-package com.lindenlabs.truckrouter.android.views
+package com.lindenlabs.truckrouter.android.base.ui.views
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,6 +12,9 @@ import com.lindenlabs.truckrouter.android.screens.show_shipment_detail.DriverDet
 import com.lindenlabs.truckrouter.presentation.HomeViewEntity
 import com.lindenlabs.truckrouter.presentation.ScheduleViewEntity
 
+/*
+    Composite list and detail view that may best be use
+ */
 @Composable
 fun ExpandedCardView(
     navController: NavHostController,
@@ -25,7 +28,7 @@ fun ExpandedCardView(
         composable(route = "drivers_list") {
             Row(modifier = Modifier.fillMaxSize()) {
                 ShowDriversScreen(
-                    viewEntity = viewEntity,
+                    viewEntity = viewEntity.copy(highlightSelected = true),
                     maxWidth = 0.5f,
                     clickAction = { schedule ->
                         clickAction(schedule)

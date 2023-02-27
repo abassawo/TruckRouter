@@ -1,4 +1,4 @@
-package com.lindenlabs.truckrouter.android.views
+package com.lindenlabs.truckrouter.android.base.ui.views
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

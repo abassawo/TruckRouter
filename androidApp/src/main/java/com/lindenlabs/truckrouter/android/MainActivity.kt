@@ -9,9 +9,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.lindenlabs.truckrouter.ResourceReader
+import com.lindenlabs.truckrouter.android.base.ui.MyApplicationTheme
+import com.lindenlabs.truckrouter.android.base.ui.views.ExpandedCardView
+import com.lindenlabs.truckrouter.android.base.ui.views.StandardCardView
+import com.lindenlabs.truckrouter.android.screens.HomeViewModel
 import com.lindenlabs.truckrouter.android.screens.show_drivers.ShowDriversScreen
-import com.lindenlabs.truckrouter.android.views.ExpandedCardView
-import com.lindenlabs.truckrouter.android.views.StandardCardView
+import com.lindenlabs.truckrouter.android.utils.WindowType
+import com.lindenlabs.truckrouter.android.utils.rememberWindowSize
 import com.lindenlabs.truckrouter.data.models.RawScheduleResponse
 import com.lindenlabs.truckrouter.domain.ScheduleDomainMapper
 import com.lindenlabs.truckrouter.presentation.HomeViewEntity
@@ -40,8 +44,9 @@ fun HomeView(homeViewModel: HomeViewModel, viewEntity: HomeViewEntity) {
         val navController = rememberNavController()
         when (window.width) {
             WindowType.Compact -> StandardCardView(navController, viewEntity)
-            else -> ExpandedCardView(navController, viewEntity.copy(highlightSelected = true)) { schedule ->
-                homeViewModel.data.value = viewEntity.copy(selectedIndex = viewEntity.schedules.indexOf(schedule))
+            else -> ExpandedCardView(navController, viewEntity) { schedule ->
+                val index = viewEntity.schedules.indexOf(schedule)
+                homeViewModel.data.value = viewEntity.copy(selectedIndex = index)
             }
         }
     }
