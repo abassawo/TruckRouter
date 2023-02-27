@@ -2,11 +2,7 @@ package com.lindenlabs.truckrouter.android
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Shapes
-import androidx.compose.material.Typography
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -15,6 +11,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+object ThemeColors {
+    val RedOrangeHex = Color(0xffffab91)
+    val RedPinkHex = Color(0xfff48fb1)
+    val BabyBlueHex = Color(0xff81deea)
+    val VioletHex = Color(0xffcf94da)
+    val LightGreenHex = Color(0xffe7ed9b)
+}
 @Composable
 fun MyApplicationTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),

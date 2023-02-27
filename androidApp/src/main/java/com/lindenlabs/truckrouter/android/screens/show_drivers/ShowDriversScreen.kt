@@ -19,24 +19,28 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
+import com.lindenlabs.truckrouter.android.ThemeColors
 import com.lindenlabs.truckrouter.presentation.HomeViewEntity
-
-const val RedOrangeHex = 0xffffab91
-const val RedPinkHex = 0xfff48fb1
-const val BabyBlueHex = 0xff81deea
-const val VioletHex = 0xffcf94da
-const val LightGreenHex = 0xffe7ed9b
+import com.lindenlabs.truckrouter.presentation.ScheduleViewEntity
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ShowDriversScreen(viewEntity: HomeViewEntity, navController: NavController) {
-    Scaffold { padding ->
+fun ShowDriversScreen(
+    maxWidth: Float = 1f,
+    viewEntity: HomeViewEntity,
+    clickAction: (schedule: ScheduleViewEntity) -> Unit,
+) {
+    Scaffold(
+        modifier = Modifier
+            .background(ThemeColors.RedOrangeHex)
+            .fillMaxWidth(maxWidth)
+    ) { padding ->
         Column(
-            modifier = Modifier
-                .background(Color.Black)
-                .fillMaxSize()
+            modifier =
+            Modifier
+                .background(ThemeColors.RedOrangeHex)
                 .padding(padding)
+                .fillMaxWidth(maxWidth)
         ) {
             Spacer(modifier = Modifier.height(4.dp))
             this@Column.AnimatedVisibility(
@@ -46,12 +50,14 @@ fun ShowDriversScreen(viewEntity: HomeViewEntity, navController: NavController) 
             ) {
                 TopAppBar(
                     backgroundColor = Color.Transparent,
-                    title = { Text(color = Color.White, text = viewEntity.headerText) },
-
+                    title = { Text(color = Color.White, text = viewEntity.headerText) }
                 )
             }
             Box(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .padding(PaddingValues(start = 16.dp))
+                    .wrapContentWidth()
+                    .fillMaxWidth(maxWidth),
                 contentAlignment = Alignment.Center
             ) {
                 this@Column.AnimatedVisibility(
@@ -67,6 +73,7 @@ fun ShowDriversScreen(viewEntity: HomeViewEntity, navController: NavController) 
                     )
                 }
             }
+
             LazyColumn(
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -76,15 +83,12 @@ fun ShowDriversScreen(viewEntity: HomeViewEntity, navController: NavController) 
                 ) { schedule ->
                     DriverItemView(
                         schedule = schedule,
-                        backgroundColor = Color.White,
+                        backgroundColor = when {
+                            viewEntity.highlightSelected -> if(schedule == viewEntity.getSelectedSchedule()) Color.Gray else Color.White
+                            else ->  Color.White
+                        },
                         onDriverClick = {
-                            navController.navigate(
-                                "schedule_detail/${
-                                    viewEntity.schedules.indexOf(
-                                        schedule
-                                    )
-                                }"
-                            )
+                            clickAction(schedule)
                         },
                         modifier = Modifier
                             .fillMaxWidth()
@@ -92,7 +96,7 @@ fun ShowDriversScreen(viewEntity: HomeViewEntity, navController: NavController) 
                             .animateItemPlacement()
                     )
                     Divider(
-                        color = Color.Blue, modifier = Modifier
+                        modifier = Modifier
                             .fillMaxHeight()
                             .width(2.dp)
                     )

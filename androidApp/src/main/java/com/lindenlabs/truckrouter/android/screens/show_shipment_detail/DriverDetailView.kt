@@ -2,11 +2,7 @@ package com.lindenlabs.truckrouter.android.screens.show_shipment_detail
 
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
-import androidx.cardview.widget.CardView
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -26,15 +22,16 @@ import com.lindenlabs.truckrouter.presentation.ScheduleViewEntity
 
 @Composable
 fun DriverDetailView(
+    maxWidth: Float = 1f,
     entity: ScheduleViewEntity,
-    navController: NavController,
+    navController: NavController? = null,
 ) {
 
     Scaffold { padding ->
         Column(
             modifier = Modifier
-                .fillMaxHeight()
-                .fillMaxSize()
+                .fillMaxWidth(maxWidth)
+                .wrapContentSize()
                 .padding(padding)
         ) {
             TopAppBar(
@@ -42,11 +39,12 @@ fun DriverDetailView(
                 title = { Text(color = Color.Black, text = entity.driverName) },
                 navigationIcon = {
                     IconButton(onClick = {
-                        navController.navigateUp()
+                        navController?.navigateUp()
                     }) {
-                        Icon(Icons.Rounded.ArrowBack, "")
+                        if(maxWidth == 1f) Icon(Icons.Rounded.ArrowBack, "")
                     }
-                })
+                }
+            )
 
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
