@@ -2,14 +2,8 @@ package com.lindenlabs.truckrouter.android.ui.screens.show_shipment_detail.map
 
 import android.content.Context
 import android.widget.Toast
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.rounded.LocationOn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -66,14 +60,14 @@ fun MapInit(title: String) {
             }
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                BottomSheet(title = title)
+                MapMarker(title = title)
             }
         }
     }
 }
 
 @Composable
-fun BottomSheet(title: String){
+fun MapMarker(title: String){
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,

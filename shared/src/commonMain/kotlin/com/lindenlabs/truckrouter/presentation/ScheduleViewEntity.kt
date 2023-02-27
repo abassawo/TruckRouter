@@ -17,7 +17,7 @@ data class HomeViewEntity(
     val headerText: String,
     var selectedIndex: Int = 0,
     val highlightSelected: Boolean = false,
-    val maxCardWidth: Float = 1f
+    val maxCardWidth: Float = 1f,
 ) {
     fun getSelectedSchedule() = schedules[selectedIndex]
 }
