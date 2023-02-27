@@ -63,7 +63,6 @@ fun ShowDriversScreen(
                     exit = fadeOut()
                 ) {
                     Text(
-                        color = Color.White,
                         text = "Total Suitability  " + viewEntity.totalSuitability,
                         fontWeight = FontWeight.SemiBold,
                         fontSize = 18.sp
