@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.lindenlabs.truckrouter.android.ui.screens.show_shipment_detail.map.BottomSheet
 import com.lindenlabs.truckrouter.android.ui.screens.show_shipment_detail.map.MapInit
 import com.lindenlabs.truckrouter.presentation.ScheduleViewEntity
 
@@ -29,7 +30,13 @@ fun DriverDetailView(
                 .padding(0.dp, 0.dp)
         ) {
             isLandscape.toTopAppBar(entity, navController)
-            MapInit(title = entity.destinationAddress + "\n" + "Suitability score: " + entity.score)
+            val canShowMap = false
+            if(canShowMap) {
+                MapInit(title = entity.destinationAddress + "\n" + "Suitability score: " + entity.score)
+            } else {
+                BottomSheet(title = entity.destinationAddress + "\n" + "Suitability score: " + entity.score)
+                Text(modifier = Modifier.padding(16.dp), text = "Feature coming soon")
+            }
         }
     }
 }
