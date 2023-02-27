@@ -41,6 +41,7 @@ fun DriverItemView(
         ) {
             Text(
                 text = schedule.driverName,
+                color = Color.Black,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 20.sp
             )
@@ -55,6 +56,6 @@ fun DriverItemView(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Text(text = schedule.destinationAddress, fontWeight = FontWeight.SemiBold)
+        Text(text = schedule.destinationAddress, color = Color.Black, fontWeight = FontWeight.SemiBold)
     }
 }
