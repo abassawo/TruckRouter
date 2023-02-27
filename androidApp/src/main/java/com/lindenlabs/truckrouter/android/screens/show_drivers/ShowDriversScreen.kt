@@ -79,7 +79,7 @@ fun ShowDriversScreen(
                     DriverItemView(
                         schedule = schedule,
                         backgroundColor = when {
-                            viewEntity.highlightSelected -> if (schedule == viewEntity.getSelectedSchedule()) Color.Gray else Color.White
+                            viewEntity.highlightSelected -> if (schedule == viewEntity.getSelectedSchedule())  ThemeColors.lightColors().first() else Color.White
                             else -> ThemeColors.lightColors().first()
                         },
                         onDriverClick = {

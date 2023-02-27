@@ -16,6 +16,7 @@ In progress:
   - Share this schedule with a contact.
   - Espresso tests
   - More unit tests
+  - Orientation switching adds a bit more complexity
 
 ### Architecture
 
