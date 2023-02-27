@@ -8,7 +8,8 @@ data class ScheduleViewEntity(
     val destinationAddress: String,
     val score: Double,
     val date: LocalDateTime,
-    val formattedDate: String = DateTimeUtil.formatDate(date).split(",").first()
+    val formattedDate: String = DateTimeUtil.formatDate(date).split(",").first(),
+    val markerText: String = "$destinationAddress\nSuitability score: $score"
 )
 
 data class HomeViewEntity(

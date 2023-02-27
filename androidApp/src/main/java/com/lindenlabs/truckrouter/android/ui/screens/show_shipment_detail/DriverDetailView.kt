@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.lindenlabs.truckrouter.android.Feature
 import com.lindenlabs.truckrouter.android.FeatureFlag
-import com.lindenlabs.truckrouter.android.ui.screens.show_shipment_detail.map.MapMarker
+import com.lindenlabs.truckrouter.android.ui.screens.show_shipment_detail.map.MarkerView
 import com.lindenlabs.truckrouter.android.ui.screens.show_shipment_detail.map.MapInit
 import com.lindenlabs.truckrouter.presentation.ScheduleViewEntity
 import com.lindenlabs.truckrouter.android.R as androidR
@@ -29,7 +29,7 @@ fun DriverDetailView(
     entity: ScheduleViewEntity,
     navController: NavController? = null,
 ) {
-    val title = entity.destinationAddress + "\n" + "Suitability score: " + entity.score
+    val markerText = entity.markerText
     val context = LocalContext.current
     Scaffold { padding ->
         Column(
@@ -41,15 +41,15 @@ fun DriverDetailView(
             entity.toTopAppBar(isLandscape, navController)
             with(FeatureFlag(LocalContext.current)) {
                 when {
-                    isAvailable(Feature.GoogleMap) -> MapInit(title = title)
+                    isAvailable(Feature.GoogleMap) -> MapInit(title = markerText)
                     else -> Column {
-                        MapMarker(title = title)
+                        MarkerView(title = markerText)
                         Button(
                             modifier = Modifier
                                 .background(Color.Transparent)
                                 .padding(16.dp, 0.dp),
                             onClick = { context.showMapsNotConfiguredMessage() }) {
-                            Text("Navigate there")
+                            Text(modifier = Modifier.background(Color.Transparent), text = "Navigate there")
                         }
                     }
                 }
@@ -59,7 +59,8 @@ fun DriverDetailView(
 }
 
 fun Context.showMapsNotConfiguredMessage() {
-    Toast.makeText(this, getString(androidR.string.feature_not_available), Toast.LENGTH_SHORT)
+    val message = getString(androidR.string.map_init_error)
+    Toast.makeText(this, message, Toast.LENGTH_SHORT)
         .show()
 }
 

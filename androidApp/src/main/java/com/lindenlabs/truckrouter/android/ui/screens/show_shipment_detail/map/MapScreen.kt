@@ -10,7 +10,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -58,16 +57,13 @@ fun MapInit(title: String) {
             onInfoWindowClick = {
                 context.showFeatureNotAvailableYetMessage()
             }
-        ) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                MapMarker(title = title)
-            }
+        ) { marker -> MarkerView(title = marker.title ?: title)
         }
     }
 }
 
 @Composable
-fun MapMarker(title: String){
+fun MarkerView(title: String){
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
@@ -76,7 +72,6 @@ fun MapMarker(title: String){
     ) {
         Text(
             text = title,
-            color = Color.Black,
             fontWeight = FontWeight.SemiBold,
             fontSize = 20.sp
         )
