@@ -1,3 +1,8 @@
 <resources>
-    <string name="feature_not_available">"Live Navigation Feature not Available</string>
+    <string name="map_init_error">"Google Maps Configuration Error: \nMake sure to add your Maps Api Key</string>
+    <string name="feature_not_available">"Live Navigation Feature not Available yet!</string>
+    <string name="navigate_there">"Navigate THere"</string>
+
+    <string name="maps_api_key">"${MAPS_API_KEY}"</string>
+<!--    <string name="maps_api_key">""</string>-->
 </resources>
