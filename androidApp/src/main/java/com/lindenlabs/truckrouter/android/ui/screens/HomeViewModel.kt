@@ -1,4 +1,4 @@
-package com.lindenlabs.truckrouter.android.screens
+package com.lindenlabs.truckrouter.android.ui.screens
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

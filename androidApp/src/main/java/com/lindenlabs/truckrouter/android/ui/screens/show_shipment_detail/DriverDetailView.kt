@@ -1,4 +1,4 @@
-package com.lindenlabs.truckrouter.android.screens.show_shipment_detail
+package com.lindenlabs.truckrouter.android.ui.screens.show_shipment_detail
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize

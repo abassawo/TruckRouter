@@ -1,4 +1,4 @@
-package com.lindenlabs.truckrouter.android.base.di
+package com.lindenlabs.truckrouter.android.di
 
 import android.app.Application
 import android.content.Context
