@@ -12,14 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 object ThemeColors {
-    val RedOrangeHex = Color(0xffffab91)
-    val RedPinkHex = Color(0xfff48fb1)
-    val BabyBlueHex = Color(0xff81deea)
     val VioletHex = Color(0xffcf94da)
-    val LightGreenHex = Color(0xffe7ed9b)
-
-    fun lightColors() = listOf(RedOrangeHex, RedPinkHex, BabyBlueHex, VioletHex, LightGreenHex)
-    fun darkColors() = listOf(Color.Black)
 }
 @Composable
 fun MyApplicationTheme(
@@ -28,13 +21,13 @@ fun MyApplicationTheme(
 ) {
     val colors = if (darkTheme) {
         darkColors(
-            primary = Color(0xFFBB86FC),
+            primary = Color.Transparent,
             primaryVariant = Color(0xFF3700B3),
             secondary = Color(0xFF03DAC5)
         )
     } else {
         lightColors(
-            primary = Color(0xFF6200EE),
+            primary = Color.Transparent,
             primaryVariant = Color(0xFF3700B3),
             secondary = Color(0xFF03DAC5)
         )

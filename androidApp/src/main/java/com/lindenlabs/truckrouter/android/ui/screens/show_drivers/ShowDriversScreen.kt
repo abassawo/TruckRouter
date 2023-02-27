@@ -29,10 +29,7 @@ fun ShowDriversScreen(
     maxWidth: Float = viewEntity.maxCardWidth,
     clickAction: (schedule: ScheduleViewEntity) -> Unit,
 ) {
-    Scaffold(
-        modifier = Modifier
-            .fillMaxWidth(maxWidth)
-    ) { padding ->
+    Scaffold(modifier = Modifier.fillMaxWidth(maxWidth)) { padding ->
         Column(
             modifier =
             Modifier
@@ -53,7 +50,7 @@ fun ShowDriversScreen(
                 modifier = Modifier
                     .padding(PaddingValues(start = 16.dp))
                     .fillMaxWidth(),
-                contentAlignment = Alignment.Center
+                contentAlignment = Alignment.CenterStart
             ) {
                 this@Column.AnimatedVisibility(
                     visible = true,
@@ -79,7 +76,7 @@ fun ShowDriversScreen(
                     DriverItemView(
                         schedule = schedule,
                         backgroundColor = when {
-                            viewEntity.highlightSelected -> if (schedule == viewEntity.getSelectedSchedule())  ThemeColors.lightColors().first() else Color.White
+                            viewEntity.highlightSelected -> if (schedule == viewEntity.getSelectedSchedule())  ThemeColors.VioletHex else Color.White
                             else -> Color.White
                         },
                         onDriverClick = {
@@ -88,7 +85,8 @@ fun ShowDriversScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(16.dp)
-                            .animateItemPlacement()
+                            .animateItemPlacement(),
+                        isLandscape = maxWidth < 1f
                     )
                     Divider(
                         modifier = Modifier

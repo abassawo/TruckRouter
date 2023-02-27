@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.lindenlabs.truckrouter.android.Feature
 import com.lindenlabs.truckrouter.android.FeatureFlag
+import com.lindenlabs.truckrouter.android.ui.ThemeColors
 import com.lindenlabs.truckrouter.android.ui.screens.show_shipment_detail.map.MarkerView
 import com.lindenlabs.truckrouter.android.ui.screens.show_shipment_detail.map.MapInit
 import com.lindenlabs.truckrouter.presentation.ScheduleViewEntity
@@ -42,7 +43,7 @@ fun DriverDetailView(
             with(FeatureFlag(LocalContext.current)) {
                 when {
                     isAvailable(Feature.GoogleMap) -> MapInit(title = markerText)
-                    else -> Column {
+                    else -> Column(modifier = Modifier.background(Color.Transparent)) {
                         MarkerView(title = markerText)
                         Button(
                             modifier = Modifier
@@ -78,7 +79,7 @@ private fun ScheduleViewEntity.toTopAppBar(isLandscape: Boolean, navController: 
                 IconButton(onClick = {
                     navController?.navigateUp()
                 }) {
-                    Icon(Icons.Rounded.ArrowBack, "")
+                    Icon(Icons.Rounded.ArrowBack, "",  tint = ThemeColors.VioletHex)
                 }
             }
         )
