@@ -4,7 +4,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -19,30 +18,27 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.lindenlabs.truckrouter.android.ThemeColors
+import com.lindenlabs.truckrouter.android.base.ui.ThemeColors
 import com.lindenlabs.truckrouter.presentation.HomeViewEntity
 import com.lindenlabs.truckrouter.presentation.ScheduleViewEntity
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ShowDriversScreen(
-    maxWidth: Float = 1f,
     viewEntity: HomeViewEntity,
+    maxWidth: Float = viewEntity.maxCardWidth,
     clickAction: (schedule: ScheduleViewEntity) -> Unit,
 ) {
     Scaffold(
         modifier = Modifier
-            .background(ThemeColors.RedOrangeHex)
             .fillMaxWidth(maxWidth)
     ) { padding ->
         Column(
             modifier =
             Modifier
-                .background(ThemeColors.RedOrangeHex)
                 .padding(padding)
-                .fillMaxWidth(maxWidth)
+                .fillMaxWidth()
         ) {
-            Spacer(modifier = Modifier.height(4.dp))
             this@Column.AnimatedVisibility(
                 visible = true,
                 enter = fadeIn(),
@@ -50,14 +46,13 @@ fun ShowDriversScreen(
             ) {
                 TopAppBar(
                     backgroundColor = Color.Transparent,
-                    title = { Text(color = Color.White, text = viewEntity.headerText) }
+                    title = { Text(text = viewEntity.headerText) }
                 )
             }
             Box(
                 modifier = Modifier
                     .padding(PaddingValues(start = 16.dp))
-                    .wrapContentWidth()
-                    .fillMaxWidth(maxWidth),
+                    .fillMaxWidth(),
                 contentAlignment = Alignment.Center
             ) {
                 this@Column.AnimatedVisibility(
@@ -66,7 +61,7 @@ fun ShowDriversScreen(
                     exit = fadeOut()
                 ) {
                     Text(
-                        color = Color.White,
+                        modifier = Modifier.padding(0.dp, 8.dp),
                         text = "Total Suitability  " + viewEntity.totalSuitability,
                         fontWeight = FontWeight.SemiBold,
                         fontSize = 18.sp
@@ -84,8 +79,8 @@ fun ShowDriversScreen(
                     DriverItemView(
                         schedule = schedule,
                         backgroundColor = when {
-                            viewEntity.highlightSelected -> if(schedule == viewEntity.getSelectedSchedule()) Color.Gray else Color.White
-                            else ->  Color.White
+                            viewEntity.highlightSelected -> if (schedule == viewEntity.getSelectedSchedule())  ThemeColors.lightColors().first() else Color.White
+                            else -> ThemeColors.lightColors().first()
                         },
                         onDriverClick = {
                             clickAction(schedule)
@@ -102,6 +97,7 @@ fun ShowDriversScreen(
                     )
                 }
             }
+
         }
     }
 }

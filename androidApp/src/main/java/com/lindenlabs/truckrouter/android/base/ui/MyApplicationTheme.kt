@@ -1,4 +1,4 @@
-package com.lindenlabs.truckrouter.android
+package com.lindenlabs.truckrouter.android.base.ui
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,6 +17,9 @@ object ThemeColors {
     val BabyBlueHex = Color(0xff81deea)
     val VioletHex = Color(0xffcf94da)
     val LightGreenHex = Color(0xffe7ed9b)
+
+    fun lightColors() = listOf(RedOrangeHex, RedPinkHex, BabyBlueHex, VioletHex, LightGreenHex)
+    fun darkColors() = listOf(Color.Black)
 }
 @Composable
 fun MyApplicationTheme(

@@ -39,7 +39,7 @@ private fun String.removeSuffixSpaceIfAny(): String {
     }
 }
 
-public inline fun String.replaceLastChar(): String {
+fun String.replaceLastChar(): String {
     return this.dropLastWhile { it.isLetter().not() }
 }
 

@@ -1,7 +1,6 @@
-package com.lindenlabs.truckrouter.android
+package com.lindenlabs.truckrouter.android.screens
 
 import android.util.Log
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,7 +8,6 @@ import com.lindenlabs.truckrouter.domain.GetScheduleDomainEntity
 import com.lindenlabs.truckrouter.presentation.HomeViewEntity
 import com.lindenlabs.truckrouter.presentation.ViewMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
