@@ -8,7 +8,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.WindowInfo
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
@@ -42,7 +41,6 @@ fun MapInit() {
         properties = mapProperties,
         uiSettings = mapUiSettings
     ) {
-        MarkerInfoWindow(position = LatLng(40.73, -73.9912))
         Marker(position = LatLng(40.73, -73.9912), onClick = { marker ->
             Log.d("MapScreen", marker.id)
             true
