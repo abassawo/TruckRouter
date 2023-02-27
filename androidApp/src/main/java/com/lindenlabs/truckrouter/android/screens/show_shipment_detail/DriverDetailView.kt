@@ -34,40 +34,8 @@ fun DriverDetailView(
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            when {
-                isLandscape -> TopAppBar(
-                    backgroundColor = Color.Transparent,
-                    title = { Text(text = entity.driverName) }
-                )
-                else -> TopAppBar(
-                    backgroundColor = Color.Transparent,
-                    title = { Text(text = entity.driverName) },
-                    navigationIcon = {
-                        IconButton(onClick = {
-                            navController?.navigateUp()
-                        }) {
-                            Icon(Icons.Rounded.ArrowBack, "")
-                        }
-                    }
-                )
-            }
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-            ) {
-                Text(
-                    text = entity.formattedDate + "\n" + entity.destinationAddress + "\n" + "Suitability score: " + entity.score,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 20.sp
-                )
-                Icon(
-                    imageVector = Icons.Default.LocationOn,
-                    contentDescription = ""
-                )
-            }
+            isLandscape.toTopAppBar(entity, navController)
+            BottomSheet(entity)
             MapInit()
             AndroidView(modifier = Modifier.padding(16.dp), factory = { context ->
                 CoordinatorLayout(context).apply {
@@ -84,5 +52,46 @@ fun DriverDetailView(
                 }
             })
         }
+    }
+}
+@Composable
+private fun Boolean.toTopAppBar(entity: ScheduleViewEntity, navController: NavController?) {
+    when {
+        this -> TopAppBar(
+            backgroundColor = Color.Transparent,
+            title = { Text(text = entity.driverName) }
+        )
+        else -> TopAppBar(
+            backgroundColor = Color.Transparent,
+            title = { Text(text = entity.driverName) },
+            navigationIcon = {
+                IconButton(onClick = {
+                    navController?.navigateUp()
+                }) {
+                    Icon(Icons.Rounded.ArrowBack, "")
+                }
+            }
+        )
+    }
+}
+
+@Composable
+fun BottomSheet(entity: ScheduleViewEntity){
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = entity.destinationAddress + "\n" + "Suitability score: " + entity.score,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 20.sp
+        )
+        Icon(
+            imageVector = Icons.Default.LocationOn,
+            contentDescription = ""
+        )
     }
 }
