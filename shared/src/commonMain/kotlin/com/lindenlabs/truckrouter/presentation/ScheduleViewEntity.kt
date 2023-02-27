@@ -14,5 +14,9 @@ data class ScheduleViewEntity(
 data class HomeViewEntity(
     val totalSuitability: Double,
     val schedules: List<ScheduleViewEntity>,
-    val headerText: String
-)
+    val headerText: String,
+    var selectedIndex: Int = 0,
+    val highlightSelected: Boolean = false
+) {
+    fun getSelectedSchedule() = schedules[selectedIndex]
+}

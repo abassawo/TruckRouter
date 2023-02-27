@@ -20,7 +20,11 @@ fun StandardCardView(navController: NavHostController, viewEntity: HomeViewEntit
         startDestination = "drivers_list"
     ) {
         composable(route = "drivers_list") {
-            ShowDriversScreen(viewEntity = viewEntity, navController = navController)
+            ShowDriversScreen(viewEntity = viewEntity, clickAction = { schedule ->
+                navController.navigate(
+                    "schedule_detail/${viewEntity.schedules.indexOf(schedule)}"
+                )
+            })
         }
         composable(
             route = "schedule_detail/{driverIdx}",
@@ -41,4 +45,4 @@ fun StandardCardView(navController: NavHostController, viewEntity: HomeViewEntit
     }
 }
 
-private fun NavBackStackEntry.toDriverIdx(): Int = arguments?.getInt("driverIdx") ?: -1
+fun NavBackStackEntry.toDriverIdx(): Int = arguments?.getInt("driverIdx") ?: -1

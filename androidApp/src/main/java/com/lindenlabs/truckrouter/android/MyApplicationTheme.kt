@@ -11,11 +11,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-val RedOrangeHex = Color(0xffffab91)
-val RedPinkHex = Color(0xfff48fb1)
-val BabyBlueHex = Color(0xff81deea)
-val VioletHex = Color(0xffcf94da)
-val LightGreenHex = Color(0xffe7ed9b)
+object ThemeColors {
+    val RedOrangeHex = Color(0xffffab91)
+    val RedPinkHex = Color(0xfff48fb1)
+    val BabyBlueHex = Color(0xff81deea)
+    val VioletHex = Color(0xffcf94da)
+    val LightGreenHex = Color(0xffe7ed9b)
+}
 @Composable
 fun MyApplicationTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),

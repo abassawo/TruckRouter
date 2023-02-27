@@ -19,31 +19,28 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import com.lindenlabs.truckrouter.android.WindowSize
-import com.lindenlabs.truckrouter.android.WindowType
+import com.lindenlabs.truckrouter.android.ThemeColors
 import com.lindenlabs.truckrouter.presentation.HomeViewEntity
+import com.lindenlabs.truckrouter.presentation.ScheduleViewEntity
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ShowDriversScreen(
+    maxWidth: Float = 1f,
     viewEntity: HomeViewEntity,
-    navController: NavController,
-    occupyMaxWidth: Boolean = true
+    clickAction: (schedule: ScheduleViewEntity) -> Unit,
 ) {
-    Scaffold { padding ->
+    Scaffold(
+        modifier = Modifier
+            .background(ThemeColors.RedOrangeHex)
+            .fillMaxWidth(maxWidth)
+    ) { padding ->
         Column(
-            modifier = Modifier
-                .background(Color.Black)
+            modifier =
+            Modifier
+                .background(ThemeColors.RedOrangeHex)
                 .padding(padding)
-                .wrapContentWidth()
-//                .also {
-//                    if(occupyMaxWidth) {
-//                        it.fillMaxSize()
-//                    } else {
-//                        it.fillMaxWidth(WindowType.Compact.sizeThreshold.toFloat())
-//                    }
-//                }
+                .fillMaxWidth(maxWidth)
         ) {
             Spacer(modifier = Modifier.height(4.dp))
             this@Column.AnimatedVisibility(
@@ -53,14 +50,14 @@ fun ShowDriversScreen(
             ) {
                 TopAppBar(
                     backgroundColor = Color.Transparent,
-                    title = { Text(color = Color.White, text = viewEntity.headerText) },
-
-                    )
+                    title = { Text(color = Color.White, text = viewEntity.headerText) }
+                )
             }
             Box(
                 modifier = Modifier
                     .padding(PaddingValues(start = 16.dp))
-                    .wrapContentWidth(),
+                    .wrapContentWidth()
+                    .fillMaxWidth(maxWidth),
                 contentAlignment = Alignment.Center
             ) {
                 this@Column.AnimatedVisibility(
@@ -76,8 +73,9 @@ fun ShowDriversScreen(
                     )
                 }
             }
+
             LazyColumn(
-                modifier = Modifier.wrapContentWidth()
+                modifier = Modifier.fillMaxWidth()
             ) {
                 items(
                     items = viewEntity.schedules,
@@ -85,15 +83,12 @@ fun ShowDriversScreen(
                 ) { schedule ->
                     DriverItemView(
                         schedule = schedule,
-                        backgroundColor = Color.White,
+                        backgroundColor = when {
+                            viewEntity.highlightSelected -> if(schedule == viewEntity.getSelectedSchedule()) Color.Gray else Color.White
+                            else ->  Color.White
+                        },
                         onDriverClick = {
-                            navController.navigate(
-                                "schedule_detail/${
-                                    viewEntity.schedules.indexOf(
-                                        schedule
-                                    )
-                                }"
-                            )
+                            clickAction(schedule)
                         },
                         modifier = Modifier
                             .fillMaxWidth()
@@ -101,7 +96,7 @@ fun ShowDriversScreen(
                             .animateItemPlacement()
                     )
                     Divider(
-                        color = Color.Blue, modifier = Modifier
+                        modifier = Modifier
                             .fillMaxHeight()
                             .width(2.dp)
                     )
