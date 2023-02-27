@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.navigation.NavController
+import com.lindenlabs.truckrouter.android.screens.show_shipment_detail.map.MapInit
 import com.lindenlabs.truckrouter.presentation.ScheduleViewEntity
 
 @Composable
@@ -31,7 +32,7 @@ fun DriverDetailView(
         Column(
             modifier = Modifier
                 .fillMaxWidth(maxWidth)
-                .wrapContentSize()
+                .fillMaxSize()
                 .padding(padding)
         ) {
             TopAppBar(
@@ -63,6 +64,7 @@ fun DriverDetailView(
                     contentDescription = ""
                 )
             }
+            MapInit()
             AndroidView(modifier = Modifier.padding(16.dp), factory = { context ->
                 CoordinatorLayout(context).apply {
                     layoutParams = ViewGroup.LayoutParams(

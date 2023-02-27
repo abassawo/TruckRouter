@@ -33,7 +33,7 @@ fun ExpandedCardView(
                     clickAction = { schedule ->
                         clickAction(schedule)
                     })
-                DriverDetailView(entity = viewEntity.getSelectedSchedule(), maxWidth = 0.7f)
+                DriverDetailView(entity = viewEntity.getSelectedSchedule())
             }
         }
     }
