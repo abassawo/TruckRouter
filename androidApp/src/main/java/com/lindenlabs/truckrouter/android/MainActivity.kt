@@ -5,11 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -40,31 +40,40 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun homeView(viewEntity: HomeViewEntity) {
     return MyApplicationTheme {
+        val window = rememberWindowSize()
         val navController = rememberNavController()
-        NavHost(
-            navController = navController,
-            startDestination = "drivers_list"
-        ) {
-            val canPop = navController.navigateUp()
-            composable(route = "drivers_list") {
-                ShowDriversScreen(viewEntity = viewEntity, navController = navController)
-            }
-            composable(
-                route = "schedule_detail/{driverIdx}",
-                arguments = listOf(
-                    navArgument(name = "driverIdx") {
-                        type = NavType.IntType
-                        defaultValue = -1
-                    }
-                )
-            ) { backStackEntry ->
-                val index = backStackEntry.toDriverIdx()
-                val schedule = viewEntity.schedules[index]
-                DriverDetailView(
-                    entity = schedule,
-                    navController = navController
-                )
-            }
+        when (window.width) {
+            WindowType.Compact -> StandardCardView(navController, viewEntity)
+            WindowType.Medium -> Text(text = "Coming soon")
+            WindowType.Expanded -> Text(text = "Coming soon")
+        }
+    }
+}
+
+@Composable
+fun StandardCardView(navController: NavHostController, viewEntity: HomeViewEntity) {
+    NavHost(
+        navController = navController,
+        startDestination = "drivers_list"
+    ) {
+        composable(route = "drivers_list") {
+            ShowDriversScreen(viewEntity = viewEntity, navController = navController)
+        }
+        composable(
+            route = "schedule_detail/{driverIdx}",
+            arguments = listOf(
+                navArgument(name = "driverIdx") {
+                    type = NavType.IntType
+                    defaultValue = -1
+                }
+            )
+        ) { backStackEntry ->
+            val index = backStackEntry.toDriverIdx()
+            val schedule = viewEntity.schedules[index]
+            DriverDetailView(
+                entity = schedule,
+                navController = navController
+            )
         }
     }
 }
