@@ -14,6 +14,7 @@ import com.lindenlabs.truckrouter.android.views.ExpandedCardView
 import com.lindenlabs.truckrouter.android.views.StandardCardView
 import com.lindenlabs.truckrouter.data.models.RawScheduleResponse
 import com.lindenlabs.truckrouter.domain.ScheduleDomainMapper
+import com.lindenlabs.truckrouter.presentation.HomeViewEntity
 import com.lindenlabs.truckrouter.presentation.ViewMapper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.serialization.decodeFromString
@@ -24,20 +25,24 @@ class MainActivity : ComponentActivity() {
     private val homeViewModel: HomeViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            homeView(viewModel = homeViewModel)
+        homeViewModel.data.observe(this) { viewEntity ->
+            setContent {
+                HomeView(homeViewModel, viewEntity)
+            }
         }
     }
 }
 
 @Composable
-fun homeView(viewModel: HomeViewModel) {
-    return MyApplicationTheme {
+fun HomeView(homeViewModel: HomeViewModel, viewEntity: HomeViewEntity) {
+    MyApplicationTheme {
         val window = rememberWindowSize()
         val navController = rememberNavController()
         when (window.width) {
-            WindowType.Compact -> viewModel.data?.let { StandardCardView(navController, it) }
-            else -> ExpandedCardView(navController, viewModel)
+            WindowType.Compact -> StandardCardView(navController, viewEntity)
+            else -> ExpandedCardView(navController, viewEntity.copy(highlightSelected = true)) { schedule ->
+                homeViewModel.data.value = viewEntity.copy(selectedIndex = viewEntity.schedules.indexOf(schedule))
+            }
         }
     }
 }

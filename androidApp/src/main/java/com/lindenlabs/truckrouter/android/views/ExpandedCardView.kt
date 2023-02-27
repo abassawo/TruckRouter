@@ -7,31 +7,30 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.lindenlabs.truckrouter.android.HomeViewModel
 import com.lindenlabs.truckrouter.android.screens.show_drivers.ShowDriversScreen
 import com.lindenlabs.truckrouter.android.screens.show_shipment_detail.DriverDetailView
+import com.lindenlabs.truckrouter.presentation.HomeViewEntity
+import com.lindenlabs.truckrouter.presentation.ScheduleViewEntity
 
 @Composable
-fun ExpandedCardView(navController: NavHostController, viewModel: HomeViewModel) {
-    val schedules = viewModel.data?.schedules ?: emptyList()
+fun ExpandedCardView(
+    navController: NavHostController,
+    viewEntity: HomeViewEntity,
+    clickAction: (schedule: ScheduleViewEntity) -> Unit
+) {
     NavHost(
         navController = navController,
         startDestination = "drivers_list"
     ) {
-
         composable(route = "drivers_list") {
             Row(modifier = Modifier.fillMaxSize()) {
-                viewModel.data?.let { viewEntity ->
-                    val updatedViewEntity = viewEntity.copy(highlightSelected = true)
-                    ShowDriversScreen(
-                        viewEntity = updatedViewEntity,
-                        maxWidth = 0.5f,
-                        clickAction = { schedule ->
-                            updatedViewEntity.selectedIndex = schedules.indexOf(schedule)
-                            // todo - have the viewmodel represent the view state
-                        })
-                    DriverDetailView(entity = updatedViewEntity.getSelectedSchedule(), maxWidth = 0.7f)
-                }
+                ShowDriversScreen(
+                    viewEntity = viewEntity,
+                    maxWidth = 0.5f,
+                    clickAction = { schedule ->
+                        clickAction(schedule)
+                    })
+                DriverDetailView(entity = viewEntity.getSelectedSchedule(), maxWidth = 0.7f)
             }
         }
     }
