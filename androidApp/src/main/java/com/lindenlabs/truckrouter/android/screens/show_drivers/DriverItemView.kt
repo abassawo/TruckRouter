@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -29,6 +30,7 @@ fun DriverItemView(
 ) {
         Column(
             modifier = modifier
+                .background(Color.LightGray)
                 .clip(RoundedCornerShape(5.dp))
                 .background(backgroundColor)
                 .clickable { onDriverClick() }
@@ -42,7 +44,6 @@ fun DriverItemView(
             ) {
                 Text(
                     text = schedule.driverName,
-                    color = Color.Black,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 20.sp
                 )
@@ -54,9 +55,7 @@ fun DriverItemView(
                         }
                 )
             }
-
             Spacer(modifier = Modifier.height(16.dp))
-
             Text(
                 text = schedule.destinationAddress,
                 color = Color.Black,

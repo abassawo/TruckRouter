@@ -17,6 +17,9 @@ object ThemeColors {
     val BabyBlueHex = Color(0xff81deea)
     val VioletHex = Color(0xffcf94da)
     val LightGreenHex = Color(0xffe7ed9b)
+
+    fun lightColors() = listOf(RedOrangeHex, RedPinkHex, BabyBlueHex, VioletHex, LightGreenHex)
+    fun darkColors() = listOf(Color.Black)
 }
 @Composable
 fun MyApplicationTheme(

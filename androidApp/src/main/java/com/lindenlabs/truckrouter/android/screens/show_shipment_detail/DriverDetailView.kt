@@ -10,6 +10,7 @@ import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.lindenlabs.truckrouter.android.ui.screens.show_shipment_detail.map.MapInit
 import com.lindenlabs.truckrouter.presentation.ScheduleViewEntity
@@ -25,7 +26,7 @@ fun DriverDetailView(
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxSize()
-                .padding(padding)
+                .padding(0.dp, 0.dp)
         ) {
             isLandscape.toTopAppBar(entity, navController)
             MapInit(title = entity.destinationAddress + "\n" + "Suitability score: " + entity.score)

@@ -50,7 +50,7 @@ fun MapInit(title: String) {
     GoogleMap(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp)
+            .padding(0.dp)
             .fillMaxSize(),
         cameraPositionState = cameraPositionState,
         properties = mapProperties,

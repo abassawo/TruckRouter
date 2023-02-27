@@ -4,7 +4,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -80,15 +79,15 @@ fun ShowDriversScreen(
                     DriverItemView(
                         schedule = schedule,
                         backgroundColor = when {
-                            viewEntity.highlightSelected -> if(schedule == viewEntity.getSelectedSchedule()) Color.Gray else Color.White
-                            else ->  Color.White
+                            viewEntity.highlightSelected -> if (schedule == viewEntity.getSelectedSchedule()) Color.Gray else Color.White
+                            else -> ThemeColors.lightColors().first()
                         },
                         onDriverClick = {
                             clickAction(schedule)
                         },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(16.dp, 0.dp)
+                            .padding(16.dp)
                             .animateItemPlacement()
                     )
                     Divider(
@@ -98,6 +97,7 @@ fun ShowDriversScreen(
                     )
                 }
             }
+
         }
     }
 }
