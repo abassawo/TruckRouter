@@ -26,8 +26,8 @@ import com.lindenlabs.truckrouter.presentation.ScheduleViewEntity
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ShowDriversScreen(
-    maxWidth: Float = 1f,
     viewEntity: HomeViewEntity,
+    maxWidth: Float = viewEntity.maxCardWidth,
     clickAction: (schedule: ScheduleViewEntity) -> Unit,
 ) {
     Scaffold(
@@ -40,7 +40,6 @@ fun ShowDriversScreen(
                 .padding(padding)
                 .fillMaxWidth()
         ) {
-            Spacer(modifier = Modifier.height(4.dp))
             this@Column.AnimatedVisibility(
                 visible = true,
                 enter = fadeIn(),
@@ -63,6 +62,7 @@ fun ShowDriversScreen(
                     exit = fadeOut()
                 ) {
                     Text(
+                        modifier = Modifier.padding(0.dp, 8.dp),
                         text = "Total Suitability  " + viewEntity.totalSuitability,
                         fontWeight = FontWeight.SemiBold,
                         fontSize = 18.sp
@@ -88,7 +88,7 @@ fun ShowDriversScreen(
                         },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(16.dp)
+                            .padding(16.dp, 0.dp)
                             .animateItemPlacement()
                     )
                     Divider(

@@ -11,20 +11,25 @@ import androidx.navigation.navArgument
 import com.lindenlabs.truckrouter.android.screens.show_drivers.ShowDriversScreen
 import com.lindenlabs.truckrouter.android.screens.show_shipment_detail.DriverDetailView
 import com.lindenlabs.truckrouter.presentation.HomeViewEntity
+import com.lindenlabs.truckrouter.presentation.ScheduleViewEntity
 
 
 @Composable
-fun StandardCardView(navController: NavHostController, viewEntity: HomeViewEntity) {
+fun StandardCardView(
+    navController: NavHostController,
+    viewEntity: HomeViewEntity,
+    clickAction: (schedule: ScheduleViewEntity) -> Unit = { schedule ->
+        navController.navigate(
+            "schedule_detail/${viewEntity.schedules.indexOf(schedule)}"
+        )
+    }
+) {
     NavHost(
         navController = navController,
         startDestination = "drivers_list"
     ) {
         composable(route = "drivers_list") {
-            ShowDriversScreen(viewEntity = viewEntity, clickAction = { schedule ->
-                navController.navigate(
-                    "schedule_detail/${viewEntity.schedules.indexOf(schedule)}"
-                )
-            })
+            ShowDriversScreen(viewEntity = viewEntity, clickAction = clickAction)
         }
         composable(
             route = "schedule_detail/{driverIdx}",
