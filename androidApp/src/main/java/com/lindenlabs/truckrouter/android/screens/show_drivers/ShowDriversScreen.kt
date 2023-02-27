@@ -32,15 +32,13 @@ fun ShowDriversScreen(
 ) {
     Scaffold(
         modifier = Modifier
-            .background(ThemeColors.RedOrangeHex)
             .fillMaxWidth(maxWidth)
     ) { padding ->
         Column(
             modifier =
             Modifier
-                .background(ThemeColors.RedOrangeHex)
                 .padding(padding)
-                .fillMaxWidth(maxWidth)
+                .fillMaxWidth()
         ) {
             Spacer(modifier = Modifier.height(4.dp))
             this@Column.AnimatedVisibility(
@@ -50,14 +48,13 @@ fun ShowDriversScreen(
             ) {
                 TopAppBar(
                     backgroundColor = Color.Transparent,
-                    title = { Text(color = Color.White, text = viewEntity.headerText) }
+                    title = { Text(text = viewEntity.headerText) }
                 )
             }
             Box(
                 modifier = Modifier
                     .padding(PaddingValues(start = 16.dp))
-                    .wrapContentWidth()
-                    .fillMaxWidth(maxWidth),
+                    .fillMaxWidth(),
                 contentAlignment = Alignment.Center
             ) {
                 this@Column.AnimatedVisibility(

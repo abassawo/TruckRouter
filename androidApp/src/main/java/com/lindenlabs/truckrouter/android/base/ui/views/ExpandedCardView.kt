@@ -2,6 +2,8 @@ package com.lindenlabs.truckrouter.android.base.ui.views
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -26,14 +28,14 @@ fun ExpandedCardView(
         startDestination = "drivers_list"
     ) {
         composable(route = "drivers_list") {
-            Row(modifier = Modifier.fillMaxSize()) {
+            Row(modifier = Modifier.fillMaxWidth()) {
                 ShowDriversScreen(
                     viewEntity = viewEntity.copy(highlightSelected = true),
-                    maxWidth = 0.5f,
+                    maxWidth = 0.3f,
                     clickAction = { schedule ->
                         clickAction(schedule)
                     })
-                DriverDetailView(entity = viewEntity.getSelectedSchedule())
+                DriverDetailView(entity = viewEntity.getSelectedSchedule(), isLandscape = true)
             }
         }
     }

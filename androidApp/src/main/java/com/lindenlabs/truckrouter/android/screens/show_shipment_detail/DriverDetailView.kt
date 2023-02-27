@@ -23,30 +23,34 @@ import com.lindenlabs.truckrouter.presentation.ScheduleViewEntity
 
 @Composable
 fun DriverDetailView(
-    maxWidth: Float = 1f,
+    isLandscape: Boolean = false,
     entity: ScheduleViewEntity,
     navController: NavController? = null,
 ) {
-
     Scaffold { padding ->
         Column(
             modifier = Modifier
-                .fillMaxWidth(maxWidth)
+                .fillMaxWidth()
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            TopAppBar(
-                backgroundColor = Color.Transparent,
-                title = { Text(color = Color.Black, text = entity.driverName) },
-                navigationIcon = {
-                    IconButton(onClick = {
-                        navController?.navigateUp()
-                    }) {
-                        if(maxWidth == 1f) Icon(Icons.Rounded.ArrowBack, "")
+            when {
+                isLandscape -> TopAppBar(
+                    backgroundColor = Color.Transparent,
+                    title = { Text(text = entity.driverName) }
+                )
+                else -> TopAppBar(
+                    backgroundColor = Color.Transparent,
+                    title = { Text(text = entity.driverName) },
+                    navigationIcon = {
+                        IconButton(onClick = {
+                            navController?.navigateUp()
+                        }) {
+                            Icon(Icons.Rounded.ArrowBack, "")
+                        }
                     }
-                }
-            )
-
+                )
+            }
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
