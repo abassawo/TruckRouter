@@ -16,8 +16,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.lindenlabs.truckrouter.android.Feature
-import com.lindenlabs.truckrouter.android.FeatureFlag
+import com.lindenlabs.truckrouter.android.ui.utils.Feature
+import com.lindenlabs.truckrouter.android.ui.utils.FeatureFlag
 import com.lindenlabs.truckrouter.android.ui.ThemeColors
 import com.lindenlabs.truckrouter.android.ui.screens.show_shipment_detail.map.MarkerView
 import com.lindenlabs.truckrouter.android.ui.screens.show_shipment_detail.map.MapInit

@@ -12,13 +12,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(val getScheduleDomainEntity: GetScheduleDomainEntity, val viewMapper: ViewMapper) : ViewModel() {
+class HomeViewModel @Inject constructor(val getScheduleDomainEntity: GetScheduleDomainEntity, private val viewMapper: ViewMapper) : ViewModel() {
 
     var data: MutableLiveData<HomeViewEntity> = MutableLiveData(HomeViewEntity(0.0, emptyList(), ""))
 
     init {
         viewModelScope.launch {
-            kotlin.runCatching {   getScheduleDomainEntity() }
+            kotlin.runCatching { getScheduleDomainEntity() }
                 .mapCatching { viewMapper.map(it)  }
                 .onSuccess {
                     Log.d("Success", it.toString())

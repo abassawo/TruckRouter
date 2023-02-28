@@ -11,12 +11,18 @@ kotlin {
                 jvmTarget = "1.8"
             }
         }
-//        sourceSets["androidMain"].resources.setSrcDirs(
-//            listOf("src/commonMain/res", "src/androidMain/res")  // <-- add the commonMain Resources
-//        )
-        sourceSets["commonMain"].dependencies {
-            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
-            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
+    }
+    sourceSets["commonMain"].dependencies {
+        implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
+        implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
+    }
+    sourceSets {
+        val androidMain by getting
+        val androidUnitTest by getting
+        val commonTest by getting {
+            dependencies {
+                implementation(kotlin("test"))
+            }
         }
     }
 }
@@ -29,3 +35,6 @@ android {
         targetSdk = 33
     }
 }
+//dependencies {
+//    testImplementation("org.junit.jupiter:junit-jupiter")
+//}
