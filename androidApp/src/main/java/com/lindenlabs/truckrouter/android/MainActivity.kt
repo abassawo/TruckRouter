@@ -9,15 +9,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.lindenlabs.truckrouter.ResourceReader
 import com.lindenlabs.truckrouter.android.ui.MyApplicationTheme
-import com.lindenlabs.truckrouter.android.ui.views.ExpandedCardView
-import com.lindenlabs.truckrouter.android.ui.views.StandardCardView
 import com.lindenlabs.truckrouter.android.ui.screens.HomeViewModel
 import com.lindenlabs.truckrouter.android.ui.screens.show_drivers.ShowDriversScreen
 import com.lindenlabs.truckrouter.android.ui.utils.WindowType
 import com.lindenlabs.truckrouter.android.ui.utils.rememberWindowSize
+import com.lindenlabs.truckrouter.android.ui.views.ExpandedCardView
+import com.lindenlabs.truckrouter.android.ui.views.StandardCardView
 import com.lindenlabs.truckrouter.data.models.RawScheduleResponse
 import com.lindenlabs.truckrouter.domain.ScheduleDomainMapper
 import com.lindenlabs.truckrouter.presentation.HomeViewEntity
@@ -44,13 +45,19 @@ fun HomeView(homeViewModel: HomeViewModel, viewEntity: HomeViewEntity) {
     MyApplicationTheme {
         val window = rememberWindowSize()
         val navController = rememberNavController()
-        when (window.width) {
-            WindowType.Compact -> StandardCardView(navController, viewEntity)
-            else -> ExpandedCardView(navController, viewEntity) { schedule ->
-                val index = viewEntity.schedules.indexOf(schedule)
-                homeViewModel.data.value = viewEntity.copy(selectedIndex = index)
-            }
+        when {
+            window.width == WindowType.Compact -> StandardCardView(navController, viewEntity)
+            LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE -> LandscapeCard(navController, viewEntity, homeViewModel)
+            else -> LandscapeCard(navController, viewEntity, homeViewModel)
         }
+    }
+}
+
+@Composable
+fun LandscapeCard(navController: NavHostController, viewEntity: HomeViewEntity, homeViewModel: HomeViewModel) {
+    ExpandedCardView(navController, viewEntity) { schedule ->
+        val index = viewEntity.schedules.indexOf(schedule)
+        homeViewModel.data.value = viewEntity.copy(selectedIndex = index)
     }
 }
 
