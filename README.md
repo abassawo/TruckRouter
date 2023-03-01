@@ -21,7 +21,7 @@ Tests for all of these interactors can be found in the shared/commonTest folder
 More on the Suitability Scorer:
 
 I thought of the first two conditions (even and odd) as base suitability determinants
-whereas the 3rd requirement as being an additional multiplier
+whereas the 3rd requirement as being an additional multiplier.
 
 ### Features
 

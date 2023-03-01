@@ -7,6 +7,7 @@
         android:name=".TruckRouterApplication"
         android:theme="@style/AppTheme">
 
+        <!--    A bit of a hack to prevent app from crashing prior to setting local.properties-->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/maps_api_key"/>
