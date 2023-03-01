@@ -1,18 +1,20 @@
 package com.lindenlabs.truckrouter.presentation
 
 import com.lindenlabs.truckrouter.DateTimeUtil
-import com.lindenlabs.truckrouter.domain.DriverDomainEntity
-import com.lindenlabs.truckrouter.domain.ShipmentDomainEntity
 import com.lindenlabs.truckrouter.domain.SuitabilityScorer
+import com.lindenlabs.truckrouter.domain.SuitableMatchDomainEntity
 
 class ViewMapper(private val scorer: SuitabilityScorer = SuitabilityScorer()) {
 
-    fun map(domainEntityMap: Map<DriverDomainEntity, ShipmentDomainEntity>): HomeViewEntity {
-        val schedules = domainEntityMap.entries.map {
-            val score = scorer.score(it.key.name, it.value.address.streetName)
+    fun map(matches: List<SuitableMatchDomainEntity>): HomeViewEntity {
+
+        val schedules = matches.map { pair ->
+            val driver = pair.first
+            val shipment = pair.second
+            val score = scorer.score(driver.name, shipment.address.streetName)
             ScheduleViewEntity(
-                driverName = it.key.name,
-                destinationAddress = it.value.address.fullAddressText,
+                driverName = driver.name,
+                destinationAddress = shipment.address.fullAddressText,
                 score = score.totalScore,
                 date = DateTimeUtil.now(),
             )

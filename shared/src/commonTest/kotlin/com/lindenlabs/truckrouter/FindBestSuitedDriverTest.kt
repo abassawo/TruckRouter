@@ -1,9 +1,9 @@
 package com.lindenlabs.truckrouter
 
-import com.lindenlabs.truckrouter.domain.Address
-import com.lindenlabs.truckrouter.domain.DriverDomainEntity
+import com.lindenlabs.truckrouter.domain.entities.Address
+import com.lindenlabs.truckrouter.domain.entities.DriverDomainEntity
 import com.lindenlabs.truckrouter.domain.FindBestSuitedDriver
-import com.lindenlabs.truckrouter.domain.ShipmentDomainEntity
+import com.lindenlabs.truckrouter.domain.entities.ShipmentDomainEntity
 import org.junit.Test
 import kotlin.test.assertEquals
 

@@ -1,7 +1,10 @@
 package com.lindenlabs.truckrouter
 
 import com.lindenlabs.truckrouter.data.models.RawScheduleResponse
-import com.lindenlabs.truckrouter.domain.*
+import com.lindenlabs.truckrouter.domain.FindBestSuitedDriver
+import com.lindenlabs.truckrouter.domain.ScheduleDomainMapper
+import com.lindenlabs.truckrouter.domain.StreetNameExtractor
+import com.lindenlabs.truckrouter.domain.SuitableMatchDomainEntity
 import com.lindenlabs.truckrouter.testdata.TestGenerator
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -24,15 +27,15 @@ class ScheduleDomainMapperTest {
     fun `test that no destination is doubly matched`() {
         val input = TestGenerator.sampleInputUnwrapped()
         val result = underTest.invoke(input)
-        val destinationsAsSet = result.values.toSet()
-        assertEquals(expected = destinationsAsSet.size, actual = result.values.size)
+        val destinationsAsSet = result.toSet()
+        assertEquals(expected = destinationsAsSet.size, actual = result.size)
     }
 
     @Test
     fun `test empty list of drivers and destinations yields empty map`() {
         val sample = RawScheduleResponse(emptyList(), emptyList())
-        val expected = emptyMap<DriverDomainEntity, ShipmentDomainEntity>()
-        val actual: Map<DriverDomainEntity, ShipmentDomainEntity> = underTest.invoke(sample)
+        val expected = emptyList<SuitableMatchDomainEntity>()
+        val actual = underTest.invoke(sample)
         assertEquals(expected = expected, actual = actual)
     }
 }

@@ -1,5 +1,7 @@
 package com.lindenlabs.truckrouter.domain
 
+import com.lindenlabs.truckrouter.domain.entities.Score
+
 
 enum class AdditionalMultiplier {
     SAME_LENGTH,

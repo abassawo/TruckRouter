@@ -1,7 +1,11 @@
 package com.lindenlabs.truckrouter.domain
 
 import com.lindenlabs.truckrouter.data.models.RawScheduleResponse
+import com.lindenlabs.truckrouter.domain.entities.Address
+import com.lindenlabs.truckrouter.domain.entities.DriverDomainEntity
+import com.lindenlabs.truckrouter.domain.entities.ShipmentDomainEntity
 
+typealias ScheduleDomainEntity = List<SuitableMatchDomainEntity>
 class ScheduleDomainMapper(
     private val streetNameExtractor: ExtractStreetName = StreetNameExtractor(),
     private val findBestSuitedDriver: ScheduleMatcher = FindBestSuitedDriver()
@@ -20,7 +24,7 @@ class ScheduleDomainMapper(
                 availableDrivers.remove(bestSuitedDriver)
             }
         }
-        return scheduleAsMap
+        return scheduleAsMap.entries.map { it.key to it.value }
     }
 
     private fun ShipmentDomainEntity.findBestMatch(availableDrivers: MutableList<DriverDomainEntity>): DriverDomainEntity? =
