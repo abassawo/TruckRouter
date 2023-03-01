@@ -5,6 +5,12 @@ An application showcasing a few things: unidirectional data flow, MVVM, jetpack 
 ### Build Instructions
 - Open in Android studio
 - Add google maps api key to local.properties ```MAPS_API_KEY="xxxx"```
+- Also go to the AndroidManifest.xml and replace the meta data block with this when the above is done:
+   ```
+      <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}"/>
+   ```
 - Run the androidApp configuration on either an emulator or physical device in android studio
 
 ### Approach
