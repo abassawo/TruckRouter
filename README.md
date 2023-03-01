@@ -60,7 +60,7 @@ support other platforms easily in the future.
 
 ### App Design
 
-The UI is build with Jetpack Compose, and supports portrait and landscape mode, I've tried to demonstrate the popular paradigm of reusing a list component
+The UI is built with Jetpack Compose, and supports portrait and landscape mode, I've tried to demonstrate the popular paradigm of reusing a list component
 and a detail component on larger devices. 
 
 
