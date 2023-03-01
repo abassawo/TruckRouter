@@ -10,13 +10,8 @@ in the future. The ScheduleDomainMapper is the main evaluator of our algorithm, 
 
 ### Features
 
-In progress:
-  - Would like to work on a phone/tablet paradigm
-  - Bonus: Native desktop version of this
-  - Share this schedule with a contact.
-  - Espresso tests
-  - More unit tests
-  - Orientation switching adds a bit more complexity
+This app supports the Google Maps integration: to get it to work, you will need to either
+  - update the local.properties file and add 
 
 ### Architecture
 

@@ -4,6 +4,5 @@
     <string name="navigate_there">"Navigate THere"</string>
 
 <!--    A bit of a hack to check if the value for the api key is set-->
-    <string name="maps_api_key">""</string>
-<!--    <string name="maps_api_key">"${MAPS_API_KEY}"</string>-->
+    <string name="maps_api_key">"${MAPS_API_KEY}"</string>
 </resources>
