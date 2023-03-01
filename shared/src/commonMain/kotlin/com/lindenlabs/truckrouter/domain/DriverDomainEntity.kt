@@ -22,7 +22,7 @@ data class DriverDomainEntity(
 
 data class Score(
     val baseScore: Double,
-    private val multiplier: Double,
+    val multiplier: Double,
     val totalScore: Double = baseScore * multiplier
 )
 

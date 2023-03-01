@@ -22,7 +22,8 @@ class ViewMapper(private val scorer: SuitabilityScorer = SuitabilityScorer()) {
         return HomeViewEntity(
             schedules = schedules,
             totalSuitability = schedules.sumOf { it.score },
-            headerText = "All Drivers: ${schedules.first().formattedDate}"
+            headerText = "All Drivers: ${schedules.first().formattedDate}",
+            selectedIndex = 0
         )
     }
 }

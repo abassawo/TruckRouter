@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(val getScheduleDomainEntity: GetScheduleDomainEntity, private val viewMapper: ViewMapper) : ViewModel() {
 
-    var data: MutableLiveData<HomeViewEntity> = MutableLiveData(HomeViewEntity(0.0, emptyList(), ""))
+    var data: MutableLiveData<HomeViewEntity> = MutableLiveData(HomeViewEntity(0.0, emptyList(), "", 0))
 
     init {
         viewModelScope.launch {
@@ -25,6 +25,13 @@ class HomeViewModel @Inject constructor(val getScheduleDomainEntity: GetSchedule
                     data.value = it
                 }
                 .onFailure { Log.d("Failure", it.toString()) }
+        }
+    }
+
+    fun onIndexChanged(index: Int) {
+        val newValue = data.value?.copy(selectedIndex = index)
+        newValue?.let {
+            data.value = it
         }
     }
 }

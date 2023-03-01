@@ -55,10 +55,7 @@ fun HomeView(homeViewModel: HomeViewModel, viewEntity: HomeViewEntity) {
 
 @Composable
 fun LandscapeCard(navController: NavHostController, viewEntity: HomeViewEntity, homeViewModel: HomeViewModel) {
-    ExpandedCardView(navController, viewEntity) { schedule ->
-        val index = viewEntity.schedules.indexOf(schedule)
-        homeViewModel.data.value = viewEntity.copy(selectedIndex = index)
-    }
+    ExpandedCardView(navController, viewEntity, homeViewModel)
 }
 
 @Preview(name = "Light Mode")

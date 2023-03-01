@@ -5,9 +5,6 @@ import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -15,33 +12,35 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.maps.android.compose.*
 import com.lindenlabs.truckrouter.android.R
+import com.lindenlabs.truckrouter.android.ui.utils.Location
+import com.lindenlabs.truckrouter.presentation.ScheduleViewEntity
 
 @Composable
-fun MapInit(title: String) {
+fun MapInit(entity: ScheduleViewEntity) {
     val context = LocalContext.current
-    val newYork = LatLng(40.73, -73.9712)
+    val location = Location.forAddress(entity.destinationAddress)
     val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(newYork, 12f)
+        position = CameraPosition.fromLatLngZoom(location, 12f)
     }
-    val marker = rememberMarkerState(position = newYork)
-    val mapProperties by remember {
-        mutableStateOf(
-            MapProperties(
-                maxZoomPreference = 16f,
-                minZoomPreference = 5f,
-                mapStyleOptions = MapStyleOptions.loadRawResourceStyle(context, R.raw.google_style)
-            )
+
+    val marker = rememberMarkerState(position = location)
+    val builder = LatLngBounds.Builder()
+    builder.include(location)
+    val mapProperties =
+        MapProperties(
+            maxZoomPreference = 16f,
+            minZoomPreference = 5f,
+            mapStyleOptions = MapStyleOptions.loadRawResourceStyle(context, R.raw.google_style)
         )
-    }
-    val mapUiSettings by remember {
-        mutableStateOf(
-            MapUiSettings(mapToolbarEnabled = false)
-        )
-    }
+
+
+    val mapUiSettings = MapUiSettings(mapToolbarEnabled = false)
+
+
     GoogleMap(
         modifier = Modifier
             .fillMaxWidth()
@@ -53,17 +52,18 @@ fun MapInit(title: String) {
     ) {
         MarkerInfoWindowContent(
             state = marker,
-            title = title,
+            title = entity.markerText,
             onInfoWindowClick = {
                 context.showFeatureNotAvailableYetMessage()
             }
-        ) { marker -> MarkerView(title = marker.title ?: title)
+        ) { marker ->
+            MarkerView(title = marker.title ?: entity.markerText)
         }
     }
 }
 
 @Composable
-fun MarkerView(title: String){
+fun MarkerView(title: String) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,

@@ -13,18 +13,19 @@ class ScheduleDomainMapperTest {
         ScheduleDomainMapper(streetNameExtractor, findBestSuitedDriver)
 
     @Test
-    fun `test that ten matchable items are in sample result`() {
+    fun `test that json with 10 drivers and 10 shipments yields 10 matches`() {
         val input = TestGenerator.sampleInputUnwrapped()
         val result = underTest.invoke(input)
-        assertEquals(10, result.size)
+        val expectedSize = 10
+        assertEquals(expected = expectedSize, actual = result.size)
     }
 
     @Test
-    fun `test that no destinations are doubly matches`() {
+    fun `test that no destination is doubly matched`() {
         val input = TestGenerator.sampleInputUnwrapped()
         val result = underTest.invoke(input)
         val destinationsAsSet = result.values.toSet()
-        assertEquals(destinationsAsSet.size, result.values.size)
+        assertEquals(expected = destinationsAsSet.size, actual = result.values.size)
     }
 
     @Test
@@ -32,6 +33,6 @@ class ScheduleDomainMapperTest {
         val sample = RawScheduleResponse(emptyList(), emptyList())
         val expected = emptyMap<DriverDomainEntity, ShipmentDomainEntity>()
         val actual: Map<DriverDomainEntity, ShipmentDomainEntity> = underTest.invoke(sample)
-        assertEquals(expected, actual)
+        assertEquals(expected = expected, actual = actual)
     }
 }

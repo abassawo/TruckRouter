@@ -4,8 +4,6 @@ plugins {
     id("com.google.dagger.hilt.android") version "2.44" apply false
     kotlin("android").version("1.8.0").apply(false)
     kotlin("multiplatform").version("1.8.0").apply(false)
-
-
 }
 
 buildscript {

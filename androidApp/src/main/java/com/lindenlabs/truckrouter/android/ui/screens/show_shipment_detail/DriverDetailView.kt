@@ -42,7 +42,7 @@ fun DriverDetailView(
             entity.toTopAppBar(isLandscape, navController)
             with(FeatureFlag(LocalContext.current)) {
                 when {
-                    isAvailable(Feature.GoogleMap) -> MapInit(title = markerText)
+                    isAvailable(Feature.GoogleMap) -> MapInit(entity)
                     else -> Column(modifier = Modifier.background(Color.Transparent)) {
                         MarkerView(title = markerText)
                         Button(

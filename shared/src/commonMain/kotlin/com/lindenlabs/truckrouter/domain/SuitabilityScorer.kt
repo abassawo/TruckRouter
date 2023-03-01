@@ -18,7 +18,7 @@ enum class Multiplier {
 class SuitabilityScorer {
 
     fun score(driverName: String, streetName: String): Score {
-        println("Driver name $driverName Street name $streetName")
+//        println("Driver name $driverName Street name $streetName")
         val baseScore = calculateBaseScore(driverName, streetName)
         var multiplierAmount = 1.0
         for(multiplier in Multiplier.values()) {

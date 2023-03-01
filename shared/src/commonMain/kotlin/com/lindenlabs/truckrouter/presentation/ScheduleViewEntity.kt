@@ -16,7 +16,7 @@ data class HomeViewEntity(
     val totalSuitability: Double,
     val schedules: List<ScheduleViewEntity>,
     val headerText: String,
-    var selectedIndex: Int = 0,
+    var selectedIndex: Int,
     val highlightSelected: Boolean = false,
     val maxCardWidth: Float = 1f,
 ) {
