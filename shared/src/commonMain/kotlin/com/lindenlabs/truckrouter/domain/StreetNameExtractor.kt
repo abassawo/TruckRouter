@@ -1,7 +1,8 @@
 package com.lindenlabs.truckrouter.domain
 
 /*
-   Street name extractor: assumes name are not numerical...
+   Street name extractor: assumes street name are not numerical...
+   Extracts street name from a String removing numbers and text like suite and apt
  */
 
 interface ExtractStreetName {

@@ -1,8 +1,11 @@
 <resources>
-    <string name="map_init_error">"Google Maps Configuration Error: \nMake sure to add your Maps Api Key</string>
+    <string name="map_init_error">"This is an experimental feature: \nMake sure to add your Maps Api Key</string>
     <string name="feature_not_available">"Live Navigation Feature not Available yet!</string>
-    <string name="navigate_there">"Navigate THere"</string>
+    <string name="navigate_there">"Try cool in-app Map experience"</string>
+    <string name="directions">"Use the native Google Maps App"</string>
 
 <!--    A bit of a hack to check if the value for the api key is set-->
     <string name="maps_api_key">"${MAPS_API_KEY}"</string>
+    <string name="app_name">Truck Router</string>
+    <string name="opt_out_of_map">Opt out of experimental feature</string>
 </resources>

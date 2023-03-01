@@ -23,7 +23,7 @@ class ScheduleDomainMapper(
         return scheduleAsMap
     }
 
-    fun ShipmentDomainEntity.findBestMatch(availableDrivers: MutableList<DriverDomainEntity>): DriverDomainEntity? =
+    private fun ShipmentDomainEntity.findBestMatch(availableDrivers: MutableList<DriverDomainEntity>): DriverDomainEntity? =
         findBestSuitedDriver(this, availableDrivers)
 
     private fun List<String>.toSortedDriverEntities(): MutableList<DriverDomainEntity> =

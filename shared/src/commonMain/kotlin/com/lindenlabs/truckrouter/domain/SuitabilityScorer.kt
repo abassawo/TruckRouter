@@ -1,7 +1,7 @@
 package com.lindenlabs.truckrouter.domain
 
 
-enum class Multiplier {
+enum class AdditionalMultiplier {
     SAME_LENGTH,
     DIVISIBLE_BY_THREE,
     DIVISIBLE_BY_FIVE;
@@ -18,10 +18,9 @@ enum class Multiplier {
 class SuitabilityScorer {
 
     fun score(driverName: String, streetName: String): Score {
-//        println("Driver name $driverName Street name $streetName")
         val baseScore = calculateBaseScore(driverName, streetName)
         var multiplierAmount = 1.0
-        for(multiplier in Multiplier.values()) {
+        for(multiplier in AdditionalMultiplier.values()) {
             if(multiplier.isAvailable(driverName = driverName, streetName = streetName)) {
                 multiplierAmount *= 1.5
             }

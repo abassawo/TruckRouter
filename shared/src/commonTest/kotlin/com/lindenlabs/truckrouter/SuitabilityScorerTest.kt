@@ -1,6 +1,6 @@
 package com.lindenlabs.truckrouter
 
-import com.lindenlabs.truckrouter.domain.Multiplier
+import com.lindenlabs.truckrouter.domain.AdditionalMultiplier
 import com.lindenlabs.truckrouter.domain.SuitabilityScorer
 import kotlin.math.pow
 import kotlin.test.Test
@@ -31,7 +31,7 @@ class SuitabilityScorerTest{
         assertTrue { score.totalScore > score.baseScore }
         assertTrue { score.multiplier > 1.0 }
         // satisfies all 3 conditions: same length, divisible by 3, divisible by 5
-        assertTrue { score.multiplier == 1.5.pow(Multiplier.values().size.toDouble()) }
+        assertTrue { score.multiplier == 1.5.pow(AdditionalMultiplier.values().size.toDouble()) }
     }
 
     @Test
