@@ -64,3 +64,11 @@ The UI is build with Jetpack Compose, and supports portrait and landscape mode, 
 and a detail component on larger devices. 
 
 
+
+<img width="346" alt="Screenshot 2023-03-01 at 12 42 17 PM" src="https://user-images.githubusercontent.com/8889247/222219564-8460481b-fe9e-4a75-a0d0-01e907a51577.png">
+
+
+
+![Screenshot 2023-03-01 at 12 43 19 PM](https://user-images.githubusercontent.com/8889247/222219739-9307ad17-3fda-48d1-b34c-f3961f33d9ad.png)
+
+
