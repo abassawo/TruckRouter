@@ -2,6 +2,11 @@
 
 An application showcasing a few things: unidirectional data flow, MVVM, jetpack compose, kotlin multiplatform to name a few.
 
+### Build Instructions
+- Open in Android studio
+- Add google maps api key to local.properties ```MAPS_API_KEY="xxxx"```
+- Run the androidApp configuration on either an emulator or physical device in android studio
+
 ### Approach
 
 I chose to work on this problem as I would a full system, with the thought in mind that parts of the algorithm or perhaps the input may change
