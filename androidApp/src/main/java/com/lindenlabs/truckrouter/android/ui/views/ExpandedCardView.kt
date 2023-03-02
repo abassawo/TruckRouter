@@ -16,17 +16,22 @@ fun ExpandedCardView(
     viewEntity: HomeViewEntity,
     viewModel: HomeViewModel
 ) {
-    Row {
-        StandardCardView(
-            navController = navController,
-            viewEntity = viewEntity.copy(
-                highlightSelected = true,
-                maxCardWidth = 0.3f
-            ), clickAction = { schedule ->
-                val index = viewEntity.schedules.indexOf(schedule)
-                viewModel.onIndexChanged(index)
-            }
-        )
-        DriverDetailView(entity = viewEntity.getSelectedSchedule(), isLandscape = true)
+    when (viewEntity) {
+        HomeViewEntity.Error -> TODO()
+        HomeViewEntity.Loading -> TODO()
+        is HomeViewEntity.Content -> Row {
+            StandardCardView(
+                navController = navController,
+                viewEntity = viewEntity.copy(
+                    highlightSelected = true,
+                    maxCardWidth = 0.3f
+                ), clickAction = { schedule ->
+                    val index = viewEntity.schedules.indexOf(schedule)
+                    viewModel.onIndexChanged(index)
+                }
+            )
+            DriverDetailView(entity = viewEntity.getSelectedSchedule(), isLandscape = true)
+        }
     }
+
 }
