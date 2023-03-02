@@ -6,7 +6,7 @@ import com.lindenlabs.truckrouter.domain.SuitableMatchDomainEntity
 
 class ViewMapper(private val scorer: SuitabilityScorer = SuitabilityScorer()) {
 
-    fun map(matches: List<SuitableMatchDomainEntity>): HomeViewEntity {
+    fun map(matches: List<SuitableMatchDomainEntity>): HomeViewEntity.Content {
 
         val schedules = matches.map { pair ->
             val driver = pair.first
@@ -21,13 +21,11 @@ class ViewMapper(private val scorer: SuitabilityScorer = SuitabilityScorer()) {
         }.sortedByDescending { it.score }
 
 
-        return HomeViewEntity(
+        return HomeViewEntity.Content(
             schedules = schedules,
             totalSuitability = schedules.sumOf { it.score },
             headerText = "All Drivers: ${schedules.first().formattedDate}",
-            selectedIndex = 0
+            selectedIndex = 0,
         )
     }
 }
-
-
