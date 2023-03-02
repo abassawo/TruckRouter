@@ -18,9 +18,11 @@ fun StandardCardView(
     navController: NavHostController,
     viewEntity: HomeViewEntity,
     clickAction: (schedule: ScheduleViewEntity) -> Unit = { schedule ->
-        navController.navigate(
-            "schedule_detail/${viewEntity.schedules.indexOf(schedule)}"
-        )
+        if (viewEntity is HomeViewEntity.Content) {
+            navController.navigate(
+                "schedule_detail/${viewEntity.schedules.indexOf(schedule)}"
+            )
+        }
     }
 ) {
     NavHost(
@@ -39,12 +41,18 @@ fun StandardCardView(
                 }
             )
         ) { backStackEntry ->
-            val index = backStackEntry.toDriverIdx()
-            val schedule = viewEntity.schedules[index]
-            DriverDetailView(
-                entity = schedule,
-                navController = navController
-            )
+            when(viewEntity) {
+                HomeViewEntity.Error -> TODO()
+                HomeViewEntity.Loading -> TODO()
+                is HomeViewEntity.Content -> {
+                    val index = backStackEntry.toDriverIdx()
+                    val schedule = viewEntity.schedules[index]
+                    DriverDetailView(
+                        entity = schedule,
+                        navController = navController
+                    )
+                }
+            }
         }
     }
 }

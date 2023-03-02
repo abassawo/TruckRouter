@@ -12,13 +12,20 @@ data class ScheduleViewEntity(
     val markerText: String = "$destinationAddress\nSuitability score: $score"
 )
 
-data class HomeViewEntity(
-    val totalSuitability: Double,
-    val schedules: List<ScheduleViewEntity>,
-    val headerText: String,
-    var selectedIndex: Int,
-    val highlightSelected: Boolean = false,
-    val maxCardWidth: Float = 1f,
-) {
-    fun getSelectedSchedule() = schedules[selectedIndex]
+sealed class HomeViewEntity(open val maxCardWidth: Float = 1f) {
+    data class Content(
+        val totalSuitability: Double,
+        val schedules: List<ScheduleViewEntity>,
+        val headerText: String,
+        var selectedIndex: Int,
+        val highlightSelected: Boolean = false,
+        override val maxCardWidth: Float = 1f
+    ) : HomeViewEntity() {
+        fun getSelectedSchedule() = schedules[selectedIndex]
+    }
+
+    object Error : HomeViewEntity()
+
+    object Loading : HomeViewEntity()
+
 }

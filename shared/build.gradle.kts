@@ -5,6 +5,12 @@ plugins {
 }
 
 kotlin {
+    jvm {
+//        compilations.all {
+//            kotlinOptions.jvmTarget = "11"
+//        }
+//        withJava()
+    }
     android {
         compilations.all {
             kotlinOptions {
@@ -17,8 +23,8 @@ kotlin {
         implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
     }
     sourceSets {
+        val jvmMain by getting
         val androidMain by getting
-        val androidUnitTest by getting
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
